@@ -37,7 +37,7 @@ export default function LoginPage() {
 
             router.push("/assistant");
         } catch (error: any) {
-            setError(error.message || "An error occurred during login");
+            setError(error.message || "Ocurrió un error al iniciar sesión");
         } finally {
             setLoading(false);
         }
@@ -53,17 +53,17 @@ export default function LoginPage() {
                 <div className="bg-white border border-gray-200 rounded-2xl p-8 mb-4">
                     <div className="flex justify-between items-center mb-6">
                         <h2 className="text-left text-2xl font-serif">
-                            Log In
+                            Iniciar sesión
                         </h2>
                         <div className="bg-gray-100 p-1 rounded-md flex text-xs font-medium">
                             <span className="text-gray-600 px-3 py-1 bg-white rounded-sm shadow-sm">
-                                Log in
+                                Iniciar sesión
                             </span>
                             <Link
                                 href="/signup"
                                 className="px-3 py-1 text-gray-500 hover:text-gray-900"
                             >
-                                Sign up
+                                Registrarse
                             </Link>
                         </div>
                     </div>
@@ -73,14 +73,14 @@ export default function LoginPage() {
                                 htmlFor="email"
                                 className="block text-sm font-medium text-gray-700 mb-2"
                             >
-                                Email
+                                Correo electrónico
                             </label>
                             <Input
                                 id="email"
                                 type="email"
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
-                                placeholder="Enter your email"
+                                placeholder="Ingresa tu correo electrónico"
                                 required
                                 className="w-full"
                             />
@@ -91,14 +91,14 @@ export default function LoginPage() {
                                 htmlFor="password"
                                 className="block text-sm font-medium text-gray-700 mb-2"
                             >
-                                Password
+                                Contraseña
                             </label>
                             <Input
                                 id="password"
                                 type="password"
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
-                                placeholder="Enter your password"
+                                placeholder="Ingresa tu contraseña"
                                 required
                                 className="w-full"
                             />
@@ -115,16 +115,20 @@ export default function LoginPage() {
                             disabled={loading}
                             className="w-full mt-5 bg-black hover:bg-gray-900 text-white"
                         >
-                            {loading ? "Logging in..." : "Log in"}
+                            {loading ? "Iniciando sesión..." : "Iniciar sesión"}
                         </Button>
                     </form>
                 </div>
                 <p className="text-center text-xs text-gray-500 leading-relaxed px-2">
-                    Mike hosted on MikeOSS.com is currently a demo service.
-                    Please do not upload, submit, or store sensitive,
-                    confidential, privileged, client, or personally
-                    identifiable documents.
+                    Mike alojado en MikeOSS.com es actualmente un servicio de
+                    demostración. Por favor, no subas, envíes ni almacenes
+                    documentos sensibles, confidenciales, privilegiados, de
+                    clientes o con información personal identificable.
                 </p>
+            </div>
+            <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 opacity-40 hover:opacity-60 transition-opacity">
+                <span className="text-[10px] tracking-[0.2em] text-gray-400 font-medium">POWERED BY</span>
+                <img src="/orviti.svg" alt="Orviti" className="h-3 w-auto" />
             </div>
         </div>
     );

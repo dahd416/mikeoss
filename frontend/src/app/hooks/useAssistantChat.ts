@@ -379,7 +379,7 @@ export function useAssistantChat({
             }
 
             const reader = response.body?.getReader();
-            if (!reader) throw new Error("No response body");
+            if (!reader) throw new Error("No se recibió cuerpo de respuesta");
 
             const decoder = new TextDecoder();
             let buffer = "";
@@ -797,7 +797,7 @@ export function useAssistantChat({
                         }
                     } catch (e) {
                         console.warn(
-                            "[useAssistantChat] failed to parse SSE line:",
+                            "[useAssistantChat] error al procesar línea SSE:",
                             trimmed,
                             e,
                         );
@@ -816,7 +816,7 @@ export function useAssistantChat({
                     replaceChatId(
                         chatId,
                         finalChatId,
-                        message.content.trim().slice(0, 120) || "New Chat",
+                        message.content.trim().slice(0, 120) || "Nueva conversación",
                     );
                 }
                 setCurrentChatId(finalChatId);
@@ -832,10 +832,10 @@ export function useAssistantChat({
             if (finalChatIdForTitle && newMessages.length === 1) {
                 const titleParts = [message.content];
                 if (message.workflow)
-                    titleParts.push(`Workflow: ${message.workflow.title}`);
+                    titleParts.push(`Flujo: ${message.workflow.title}`);
                 if (message.files?.length)
                     titleParts.push(
-                        `Files: ${message.files.map((f) => f.filename).join(", ")}`,
+                        `Archivos: ${message.files.map((f) => f.filename).join(", ")}`,
                     );
                 void generateTitle(finalChatIdForTitle, titleParts.join("\n"));
             }
@@ -850,7 +850,7 @@ export function useAssistantChat({
                         const updated = [...prev];
                         const events = last.events ?? [];
                         const idx = findLastContentIndex(events);
-                        const cancelText = "Cancelled by user";
+                        const cancelText = "Cancelado por el usuario";
                         if (idx >= 0) {
                             const newEvents = [...events];
                             const existing = newEvents[idx] as {
@@ -860,7 +860,7 @@ export function useAssistantChat({
                             newEvents[idx] = {
                                 type: "content",
                                 text: existing.text
-                                    ? `${existing.text}\n\nCancelled by user`
+                                    ? `${existing.text}\n\nCancelado por el usuario`
                                     : cancelText,
                             };
                             updated[updated.length - 1] = {
@@ -884,7 +884,7 @@ export function useAssistantChat({
                             role: "assistant",
                             content: "",
                             events: [
-                                { type: "content", text: "Cancelled by user" },
+                                { type: "content", text: "Cancelado por el usuario" },
                             ],
                         },
                     ];
@@ -894,7 +894,7 @@ export function useAssistantChat({
                 const errorMessage =
                     error instanceof Error && error.message
                         ? error.message
-                        : "Sorry, something went wrong.";
+                        : "Lo sentimos, algo salió mal.";
                 setMessages((prev) => {
                     const last = prev[prev.length - 1];
                     if (last?.role === "assistant") {

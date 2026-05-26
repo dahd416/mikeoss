@@ -34,10 +34,10 @@ const CHECK_W = "w-8 shrink-0";
 const NAME_COL_W = "w-[300px] shrink-0";
 
 const TABS: { id: Tab; label: string }[] = [
-    { id: "all", label: "All" },
-    { id: "builtin", label: "Built-in" },
-    { id: "custom", label: "Custom" },
-    { id: "hidden", label: "Hidden" },
+    { id: "all", label: "Todos" },
+    { id: "builtin", label: "Integrados" },
+    { id: "custom", label: "Personalizados" },
+    { id: "hidden", label: "Ocultos" },
 ];
 
 export function WorkflowList() {
@@ -203,7 +203,7 @@ export function WorkflowList() {
         type === "tabular"
             ? { label: "Tabular", Icon: Table2, className: "text-violet-700" }
             : {
-                  label: "Assistant",
+                  label: "Asistente",
                   Icon: MessageSquare,
                   className: "text-blue-700",
               };
@@ -221,8 +221,8 @@ export function WorkflowList() {
                 {typeFilter
                     ? typeFilter === "tabular"
                         ? "Tabular"
-                        : "Assistant"
-                    : "Filter by type"}
+                        : "Asistente"
+                    : "Filtrar por tipo"}
                 <ChevronDown className="h-3 w-3" />
             </button>
             {typeFilterOpen && (
@@ -234,7 +234,7 @@ export function WorkflowList() {
                         }}
                         className="flex items-center justify-between w-full px-3 py-2 text-xs text-gray-600 hover:bg-gray-50 transition-colors"
                     >
-                        All Types
+                         Todos los tipos
                         {!typeFilter && (
                             <Check className="h-3.5 w-3.5 text-gray-400" />
                         )}
@@ -278,7 +278,7 @@ export function WorkflowList() {
                         : "text-gray-500 hover:text-gray-700"
                 }`}
             >
-                {practiceFilter ?? "Filter by practice"}
+                {practiceFilter ?? "Filtrar por práctica"}
                 <ChevronDown className="h-3 w-3" />
             </button>
             {practiceFilterOpen && (
@@ -290,7 +290,7 @@ export function WorkflowList() {
                         }}
                         className="flex items-center justify-between w-full px-3 py-2 text-xs text-gray-600 hover:bg-gray-50 transition-colors"
                     >
-                        All Practices
+                         Todas las prácticas
                         {!practiceFilter && (
                             <Check className="h-3.5 w-3.5 text-gray-400" />
                         )}
@@ -324,26 +324,26 @@ export function WorkflowList() {
                 <div ref={actionsRef} className="relative">
                     <button
                         onClick={() => setActionsOpen((v) => !v)}
-                        className="flex items-center gap-1 text-xs font-medium text-gray-700 hover:text-gray-900 transition-colors"
+                         className="flex items-center gap-1 text-xs font-medium text-gray-700 hover:text-gray-900 transition-colors"
                     >
-                        Actions
+                        Acciones
                         <ChevronDown className="h-3.5 w-3.5" />
                     </button>
                     {actionsOpen && (
                         <div className="absolute top-full right-0 mt-1 w-36 rounded-lg border border-gray-100 bg-white shadow-lg z-50 overflow-hidden">
-                            {activeTab === "hidden" ? (
+                             {activeTab === "hidden" ? (
                                 <button
                                     onClick={handleBulkUnhide}
                                     className="w-full px-3 py-1.5 text-left text-xs text-gray-700 hover:bg-gray-50 transition-colors"
                                 >
-                                    Unhide
+                                    Mostrar
                                 </button>
                             ) : (
                                 <button
                                     onClick={handleBulkRemove}
                                     className="w-full px-3 py-1.5 text-left text-xs text-red-600 hover:bg-red-50 transition-colors"
                                 >
-                                    Delete
+                                    Eliminar
                                 </button>
                             )}
                         </div>
@@ -362,13 +362,13 @@ export function WorkflowList() {
             {/* Page header */}
             <div className="mb-1 flex items-center justify-between px-4 py-3 md:px-10 shrink-0">
                 <h1 className="text-2xl font-medium font-serif text-gray-900">
-                    Workflows
+                    Flujos de trabajo
                 </h1>
                 <div className="flex items-center gap-2">
                     <HeaderSearchBtn
                         value={search}
                         onChange={setSearch}
-                        placeholder="Search workflows…"
+                        placeholder="Buscar flujos de trabajo…"
                     />
                     <button
                         onClick={() => setNewModalOpen(true)}
@@ -405,11 +405,11 @@ export function WorkflowList() {
                             )}
                         </div>
                         <div className={`sticky left-8 z-[60] ${NAME_COL_W} bg-white pl-2 text-left`}>
-                            Name
+                            Nombre
                         </div>
-                        <div className="ml-auto w-28 shrink-0">Type</div>
-                        <div className="w-40 shrink-0">Practice</div>
-                        <div className="w-28 shrink-0">Source</div>
+                        <div className="ml-auto w-28 shrink-0">Tipo</div>
+                        <div className="w-40 shrink-0">Práctica</div>
+                        <div className="w-28 shrink-0">Fuente</div>
                         <div className="w-8 shrink-0" />
                     </div>
 
@@ -443,41 +443,42 @@ export function WorkflowList() {
                                 <>
                                     <Library className="h-8 w-8 text-gray-300 mb-4" />
                                     <p className="text-2xl font-medium font-serif text-gray-900">
-                                        Custom Workflows
+                                        Flujos personalizados
                                     </p>
                                     <p className="mt-1 text-xs text-gray-400 text-left">
-                                        Build reusable prompts and tabular
-                                        review templates tailored to your
-                                        practice.
+                                        Crea prompts reutilizables y plantillas
+                                        de revisión tabular adaptadas a tu
+                                        práctica.
                                     </p>
                                     <button
                                         onClick={() => setNewModalOpen(true)}
                                         className="mt-4 inline-flex items-center gap-1 rounded-full bg-gray-900 px-3 py-1 text-xs font-medium text-white hover:bg-gray-700 transition-colors shadow-md"
                                     >
-                                        + Create New
+                                        + Crear nuevo
                                     </button>
                                 </>
                             ) : activeTab === "hidden" ? (
                                 <>
                                     <Library className="h-8 w-8 text-gray-300 mb-4" />
                                     <p className="text-2xl font-medium font-serif text-gray-900">
-                                        Hidden Workflows
+                                        Flujos ocultos
                                     </p>
                                     <p className="mt-1 text-xs text-gray-400 text-left">
-                                        Built-in workflows you've hidden will
-                                        appear here. You can unhide them at any
-                                        time.
+                                        Los flujos de trabajo integrados que has
+                                        ocultado aparecerán aquí. Puedes
+                                        mostrarlos de nuevo en cualquier momento.
                                     </p>
                                 </>
                             ) : (
                                 <>
                                     <Library className="h-8 w-8 text-gray-300 mb-4" />
                                     <p className="text-2xl font-medium font-serif text-gray-900">
-                                        Workflows
+                                        Flujos de trabajo
                                     </p>
                                     <p className="mt-1 text-xs text-gray-400 text-left">
-                                        Automate document analysis with reusable
-                                        prompts and tabular review templates.
+                                        Automatiza el análisis de documentos con
+                                        prompts reutilizables y plantillas de
+                                        revisión tabular.
                                     </p>
                                 </>
                             )}
@@ -543,13 +544,13 @@ export function WorkflowList() {
                                     ) : wf.user_id === user?.id ? (
                                         <span className="inline-flex items-center gap-1.5 text-xs font-medium text-gray-600">
                                             <User className="h-3.5 w-3.5 text-gray-500" />
-                                            Myself
+                                            Yo
                                         </span>
                                     ) : (
                                         <span className="inline-flex items-center gap-1.5 text-xs font-medium text-gray-600 truncate max-w-full">
                                             <User className="h-3.5 w-3.5 text-gray-400 shrink-0" />
                                             <span className="truncate">
-                                                {wf.shared_by_name ?? "Shared"}
+                                                {wf.shared_by_name ?? "Compartido"}
                                             </span>
                                         </span>
                                     )}

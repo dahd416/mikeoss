@@ -31,10 +31,10 @@ export function PreResponseWrapper({
         setIsOpen(!shouldMinimize && !hasMinimizedRef.current);
     }, [shouldMinimize, userToggled]);
 
-    const stepWord = `step${stepCount === 1 ? "" : "s"}`;
+    const stepWord = `paso${stepCount === 1 ? "" : "s"}`;
     const label = isStreaming
-        ? "Working"
-        : `Completed in ${stepCount} ${stepWord}`;
+        ? "Trabajando"
+        : `Completado en ${stepCount} ${stepWord}`;
 
     const buttonTextClass = compact ? "text-xs" : "text-sm";
     const childrenGapClass = compact ? "gap-2.5" : "gap-4";

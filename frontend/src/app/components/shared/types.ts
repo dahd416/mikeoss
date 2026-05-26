@@ -207,10 +207,10 @@ export function expandCitationToEntries(
   return [{ page: pageNum, quote: a.quote }];
 }
 
-/** Format the page(s) of a citation for display, e.g. "Page 3" or "Page 41-42". */
+/** Format the page(s) of a citation for display, e.g. "Página 3" or "Página 41-42". */
 export function formatCitationPage(a: MikeCitationAnnotation): string {
-  if (typeof a.page === "string") return `Page ${a.page}`;
-  return `Page ${a.page}`;
+  if (typeof a.page === "string") return `Página ${a.page}`;
+  return `Página ${a.page}`;
 }
 
 /** Produce a reader-friendly version of the quote (replaces [[PAGE_BREAK]] with "..."). */

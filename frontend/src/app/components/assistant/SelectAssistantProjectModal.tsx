@@ -46,9 +46,9 @@ export function SelectAssistantProjectModal({ open, onClose }: Props) {
                 {/* Header */}
                 <div className="flex items-center justify-between px-5 py-4">
                     <div className="flex items-center gap-1.5 text-xs text-gray-400">
-                        <span>Assistant</span>
+                        <span>Asistente</span>
                         <span>›</span>
-                        <span>Start Chat in a Project</span>
+                        <span>Iniciar chat en un proyecto</span>
                     </div>
                     <button
                         onClick={onClose}
@@ -71,7 +71,7 @@ export function SelectAssistantProjectModal({ open, onClose }: Props) {
                         onClick={onClose}
                         className="rounded-lg px-3 py-1.5 text-sm text-gray-500 hover:bg-gray-100"
                     >
-                        Cancel
+                        Cancelar
                     </button>
                     <button
                         onClick={handleContinue}
@@ -81,7 +81,7 @@ export function SelectAssistantProjectModal({ open, onClose }: Props) {
                         {creating ? (
                             <Loader2 className="h-3.5 w-3.5 animate-spin" />
                         ) : (
-                            "Continue"
+                            "Continuar"
                         )}
                     </button>
                 </div>

@@ -8,13 +8,13 @@ export default function GlobalError({
     error: Error & { digest?: string };
 }) {
     useEffect(() => {
-        console.error("Global error:", error);
+        console.error("Error global:", error);
     }, [error]);
 
     return (
-        <html lang="en">
+        <html lang="es">
             <head>
-                <title>Something went wrong – Mike</title>
+                <title>Algo salió mal – Mike</title>
                 <style>{`
                     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=EB+Garamond:wght@400;500&display=swap');
                     
@@ -79,16 +79,16 @@ export default function GlobalError({
             </head>
             <body>
                 <div className="error-container">
-                    <h1 className="error-title">Something went wrong</h1>
+                    <h1 className="error-title">Algo salió mal</h1>
                     <p className="error-message">
-                        We encountered an unexpected error. This has been logged
-                        and our team will look into it.
+                        Encontramos un error inesperado. Se ha registrado y
+                        nuestro equipo lo investigará.
                     </p>
                     <button
                         className="btn-back"
                         onClick={() => window.history.back()}
                     >
-                        Back
+                        Volver
                     </button>
                 </div>
             </body>

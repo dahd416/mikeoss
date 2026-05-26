@@ -46,7 +46,7 @@ export function TextSearchWidget({
                     <Input
                         ref={searchInputRef}
                         autoFocus
-                        placeholder="Find"
+                        placeholder="Buscar"
                         value={searchQuery}
                         onChange={(e) => onSearchChange(e.target.value)}
                         className="h-8 text-sm w-full pr-[80px] rounded-sm border-gray-200 bg-gray-100/50 focus-visible:ring-0 focus-visible:border-blue-600 placeholder:text-gray-500"
@@ -68,8 +68,8 @@ export function TextSearchWidget({
                 <div className="flex items-center justify-between px-2 pb-1 pt-0.5 text-xs text-gray-500">
                     <span>
                         {matchCount > 0
-                            ? `${currentMatchIdx + 1} of ${matchCount}`
-                            : "No results"}
+                            ? `${currentMatchIdx + 1} de ${matchCount}`
+                            : "Sin resultados"}
                     </span>
                     <div className="flex items-center gap-1">
                         <button

@@ -204,7 +204,7 @@ function CitationHeader({
     return (
         <div className="pt-2 pb-3">
             <div className="flex items-center gap-2 mb-2">
-                <SectionLabel>Citation</SectionLabel>
+                <SectionLabel>Cita</SectionLabel>
                 <div className="ml-auto shrink-0">
                     <DownloadButton
                         documentId={documentId}
@@ -245,7 +245,7 @@ function TrackedChangeHeader({
     return (
         <div className="pt-2 pb-3">
             <div className="flex items-center gap-2 mb-2">
-                <SectionLabel>Tracked Change</SectionLabel>
+                <SectionLabel>Cambio rastreado</SectionLabel>
                 <div className="ml-auto flex items-center gap-2 shrink-0">
                     <EditResolveButtons
                         edit={edit}
@@ -350,7 +350,7 @@ function EditResolveButtons({
                 revert = applyOptimisticResolution(edit, verb);
             } catch (e) {
                 console.error(
-                    "[DocPanel] optimistic update threw",
+                    "[DocPanel] error en actualización optimista",
                     e,
                 );
             }
@@ -390,12 +390,12 @@ function EditResolveButtons({
                     downloadUrl: data.download_url,
                 });
             } catch (e) {
-                console.error("[DocPanel] resolve failed", e);
+                console.error("[DocPanel] error en resolución", e);
                 try {
                     revert?.();
                 } catch (revertErr) {
                     console.error(
-                        "[DocPanel] revert threw",
+                        "[DocPanel] error en reversión",
                         revertErr,
                     );
                 }
@@ -405,8 +405,8 @@ function EditResolveButtons({
                     versionId: edit.version_id ?? null,
                     message:
                         verb === "accept"
-                            ? "Couldn't save accept — please retry."
-                            : "Couldn't save reject — please retry.",
+                            ? "No se pudo guardar la aceptación — intente de nuevo."
+                            : "No se pudo guardar el rechazo — intente de nuevo.",
                 });
             } finally {
                 setBusy(false);
@@ -423,14 +423,14 @@ function EditResolveButtons({
                 disabled={inFlight || resolved}
                 className="inline-flex items-center gap-1 rounded-lg border border-gray-900 bg-gray-900 px-2 py-1.5 text-xs font-medium text-white hover:bg-gray-800 disabled:opacity-50 disabled:cursor-not-allowed"
             >
-                {status === "accepted" ? "Accepted" : "Accept"}
+                {status === "accepted" ? "Aceptado" : "Aceptar"}
             </button>
             <button
                 onClick={() => handle("reject")}
                 disabled={inFlight || resolved}
                 className="inline-flex items-center gap-1 rounded-lg border border-gray-200 bg-white px-2 py-1.5 text-xs font-medium text-gray-700 hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed"
             >
-                {status === "rejected" ? "Rejected" : "Reject"}
+                {status === "rejected" ? "Rechazado" : "Rechazar"}
             </button>
         </div>
     );
@@ -499,7 +499,7 @@ function DownloadButton({
             ) : (
                 <Download className="h-3.5 w-3.5" />
             )}
-            Download
+            Descargar
         </button>
     );
 }

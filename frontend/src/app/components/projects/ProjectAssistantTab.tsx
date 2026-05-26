@@ -65,24 +65,24 @@ export function ProjectAssistantTab({
                 >
                     Chats
                 </div>
-                <div className="ml-auto w-32 shrink-0 text-left">Created</div>
+                <div className="ml-auto w-32 shrink-0 text-left">Creado</div>
                 <div className="w-8 shrink-0" />
             </div>
             {chats.length === 0 ? (
                 <div className="flex flex-col items-start py-24 w-full max-w-xs mx-auto">
                     <MessageSquare className="h-8 w-8 text-gray-300 mb-4" />
                     <p className="text-2xl font-medium font-serif text-gray-900">
-                        Assistant
+                        Asistente
                     </p>
                     <p className="mt-1 text-xs text-gray-400 max-w-xs">
-                        Ask questions and get answers grounded in the documents
-                        in this project.
+                        Haz preguntas y obtén respuestas basadas en los
+                        documentos de este proyecto.
                     </p>
                     <button
                         onClick={onCreateChat}
                         className="mt-4 inline-flex items-center gap-1 rounded-full bg-gray-900 px-3 py-1 text-xs font-medium text-white hover:bg-gray-700 transition-colors shadow-md"
                     >
-                        + Create New
+                        + Crear nuevo
                     </button>
                 </div>
             ) : (
@@ -139,7 +139,7 @@ export function ProjectAssistantTab({
                                     />
                                 ) : (
                                     <span className="text-sm text-gray-800 truncate block">
-                                        {chat.title ?? "Untitled Chat"}
+                                        {chat.title ?? "Chat sin título"}
                                     </span>
                                 )}
                             </div>
@@ -156,11 +156,11 @@ export function ProjectAssistantTab({
                                             currentUserId &&
                                             chat.user_id !== currentUserId
                                         ) {
-                                            onOwnerOnlyAction("rename this chat");
+                                            onOwnerOnlyAction("renombrar este chat");
                                             return;
                                         }
                                         setRenameChatValue(
-                                            chat.title ?? "Untitled Chat",
+                                            chat.title ?? "Chat sin título",
                                         );
                                         setRenamingChatId(chat.id);
                                     }}

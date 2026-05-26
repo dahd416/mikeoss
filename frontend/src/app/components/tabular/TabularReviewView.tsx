@@ -214,7 +214,7 @@ export function TRView({ reviewId, projectId }: Props) {
             }
             await handleAddDocuments(uploaded);
         } catch (err) {
-            console.error("Tabular review document drop upload failed", err);
+            console.error("Falló la carga de documentos por arrastre en revisión tabular", err);
         } finally {
             setUploadingDroppedFilenames([]);
         }
@@ -257,7 +257,7 @@ export function TRView({ reviewId, projectId }: Props) {
                     : null,
             );
         } catch (err) {
-            console.error("Regeneration failed", err);
+            console.error("Falló la regeneración", err);
             setCells((prev) =>
                 prev.map((c) =>
                     c.document_id === docId && c.column_index === colIndex
@@ -368,7 +368,7 @@ export function TRView({ reviewId, projectId }: Props) {
                 }
             }
         } catch (err) {
-            console.error("Generation failed", err);
+            console.error("Falló la generación", err);
         } finally {
             setGenerating(false);
         }
@@ -429,7 +429,7 @@ export function TRView({ reviewId, projectId }: Props) {
                         ),
                 ),
             );
-            console.error("Failed to save column", err);
+            console.error("Error al guardar la columna", err);
         } finally {
             setSavingColumn(false);
         }
@@ -445,7 +445,7 @@ export function TRView({ reviewId, projectId }: Props) {
             await saveColumnsConfig(nextColumns);
         } catch (err) {
             setColumns(previousColumns);
-            console.error("Failed to update column", err);
+            console.error("Error al actualizar la columna", err);
         }
     }
 
@@ -459,7 +459,7 @@ export function TRView({ reviewId, projectId }: Props) {
             await saveColumnsConfig(nextColumns);
         } catch (err) {
             setColumns(previousColumns);
-            console.error("Failed to delete column", err);
+            console.error("Error al eliminar la columna", err);
         }
     }
 
@@ -495,7 +495,7 @@ export function TRView({ reviewId, projectId }: Props) {
             setDocuments(previousDocuments);
             setCells(previousCells);
             setSelectedDocIds(idsToDelete);
-            console.error("Failed to delete tabular review documents", err);
+            console.error("Error al eliminar documentos de la revisión tabular", err);
         }
     }
 
@@ -537,7 +537,7 @@ export function TRView({ reviewId, projectId }: Props) {
                                     onClick={() => router.push("/projects")}
                                     className="text-gray-500 hover:text-gray-700 transition-colors"
                                 >
-                                    Projects
+                                    Proyectos
                                 </button>
                                 <span className="text-gray-300">›</span>
                                 <button
@@ -568,7 +568,7 @@ export function TRView({ reviewId, projectId }: Props) {
                                     }
                                     className="text-gray-500 hover:text-gray-700 transition-colors"
                                 >
-                                    Tabular Reviews
+                                    Revisiones Tabulares
                                 </button>
                             </>
                         )}
@@ -577,7 +577,7 @@ export function TRView({ reviewId, projectId }: Props) {
                                 onClick={() => router.push("/tabular-reviews")}
                                 className="text-gray-500 hover:text-gray-700 transition-colors"
                             >
-                                Tabular Reviews
+                                Revisiones Tabulares
                             </button>
                         )}
                         <span className="text-gray-300">›</span>
@@ -585,14 +585,14 @@ export function TRView({ reviewId, projectId }: Props) {
                             <div className="h-6 w-40 rounded bg-gray-100 animate-pulse" />
                         ) : (
                             <RenameableTitle
-                                value={review?.title || "Untitled Review"}
+                                value={review?.title || "Revisión sin título"}
                                 onCommit={handleTitleCommit}
                             />
                         )}
                     </div>
                     {!loading && (
                         <div className="flex items-center gap-2">
-                            <HeaderSearchBtn value={search} onChange={setSearch} placeholder="Search documents…" />
+                            <HeaderSearchBtn value={search} onChange={setSearch} placeholder="Buscar documentos…" />
                             {!projectId && (
                                 <button
                                     onClick={() => setPeopleModalOpen(true)}
@@ -602,8 +602,8 @@ export function TRView({ reviewId, projectId }: Props) {
                                             ? "text-gray-300 cursor-default"
                                             : "text-gray-500 hover:text-gray-900 cursor-pointer"
                                     }`}
-                                    title="People with access"
-                                    aria-label="People with access"
+                                    title="Personas con acceso"
+                                    aria-label="Personas con acceso"
                                 >
                                     <Users className="h-4 w-4" />
                                 </button>
@@ -611,14 +611,14 @@ export function TRView({ reviewId, projectId }: Props) {
                             <button
                                 onClick={() =>
                                     exportTabularReviewToExcel({
-                                        reviewTitle: review?.title || "Tabular Review",
+                                        reviewTitle: review?.title || "Revisión Tabular",
                                         columns,
                                         documents,
                                         cells,
                                     })
                                 }
                                 disabled={columns.length === 0 || documents.length === 0}
-                                title="Export to Excel"
+                                title="Exportar a Excel"
                                 className={`flex h-8 items-center justify-center gap-1.5 px-3 text-sm transition-colors ${
                                     columns.length === 0 || documents.length === 0
                                         ? "text-gray-300 cursor-default"
@@ -626,7 +626,7 @@ export function TRView({ reviewId, projectId }: Props) {
                                 }`}
                             >
                                 <Download className="h-4 w-4" />
-                                Export
+                                Exportar
                             </button>
                             <button
                                 onClick={handleGenerate}
@@ -650,7 +650,7 @@ export function TRView({ reviewId, projectId }: Props) {
                                 ) : (
                                     <Play className="h-4 w-4" />
                                 )}
-                                {generating ? "Running…" : "Run"}
+                                {generating ? "Ejecutando…" : "Ejecutar"}
                             </button>
                         </div>
                     )}
@@ -672,7 +672,7 @@ export function TRView({ reviewId, projectId }: Props) {
                         }`}
                     >
                         <MessageSquare className="h-3.5 w-3.5" />
-                        Assistant in Tabular Review
+                        Asistente en Revisión Tabular
                     </button>
                     <div className="ml-auto flex items-center gap-5">
                         {loading ? (
@@ -687,7 +687,7 @@ export function TRView({ reviewId, projectId }: Props) {
                                     onClick={() => setActionsOpen((v) => !v)}
                                     className="flex items-center gap-1 text-xs font-medium text-gray-600 hover:text-gray-900 transition-colors"
                                 >
-                                    Actions
+                                    Acciones
                                     <ChevronDown className="h-3.5 w-3.5" />
                                 </button>
                                 {actionsOpen && (
@@ -696,13 +696,13 @@ export function TRView({ reviewId, projectId }: Props) {
                                             onClick={handleClearResults}
                                             className="w-full px-3 py-1.5 text-left text-xs text-gray-700 hover:bg-gray-50 transition-colors"
                                         >
-                                            Clear results
+                                            Limpiar resultados
                                         </button>
                                         <button
                                             onClick={handleDeleteDocuments}
                                             className="w-full px-3 py-1.5 text-left text-xs text-red-600 hover:bg-red-50 transition-colors"
                                         >
-                                            Delete
+                                            Eliminar
                                         </button>
                                     </div>
                                 )}
@@ -720,7 +720,7 @@ export function TRView({ reviewId, projectId }: Props) {
                                     }`}
                                 >
                                     <Upload className="h-3.5 w-3.5" />
-                                    Add Documents
+                                    Agregar Documentos
                                 </button>
                                 <button
                                     onClick={() => setAddColOpen(true)}
@@ -732,7 +732,7 @@ export function TRView({ reviewId, projectId }: Props) {
                                     }`}
                                 >
                                     <Plus className="h-3.5 w-3.5" />
-                                    Add Columns
+                                    Agregar Columnas
                                 </button>
                             </>
                         )}
@@ -874,14 +874,14 @@ export function TRView({ reviewId, projectId }: Props) {
                         handleAddDocuments(docs)
                     }
                     breadcrumb={[
-                        "Projects",
+                        "Proyectos",
                         project.name +
                             (project.cm_number
                                 ? ` (#${project.cm_number})`
                                 : ""),
-                        "Tabular Reviews",
-                        ...(review ? [review.title || "Untitled Review"] : []),
-                        "Add Documents",
+                        "Revisiones Tabulares",
+                        ...(review ? [review.title || "Revisión sin título"] : []),
+                        "Agregar Documentos",
                     ]}
                     projectId={project.id}
                     excludeDocIds={new Set(documents.map((d) => d.id))}
@@ -894,9 +894,9 @@ export function TRView({ reviewId, projectId }: Props) {
                         handleAddDocuments(docs)
                     }
                     breadcrumb={[
-                        "Tabular Reviews",
-                        ...(review ? [review.title || "Untitled Review"] : []),
-                        "Add Documents",
+                        "Revisiones Tabulares",
+                        ...(review ? [review.title || "Revisión sin título"] : []),
+                        "Agregar Documentos",
                     ]}
                 />
             )}
@@ -908,9 +908,9 @@ export function TRView({ reviewId, projectId }: Props) {
                 fetchPeople={getTabularReviewPeople}
                 currentUserEmail={user?.email ?? null}
                 breadcrumb={[
-                    "Tabular Reviews",
-                    review?.title || "Untitled Review",
-                    "People",
+                    "Revisiones Tabulares",
+                    review?.title || "Revisión sin título",
+                    "Personas",
                 ]}
                 // Only the review owner may modify the member list. PeopleModal
                 // hides the add/remove controls when this prop is undefined.

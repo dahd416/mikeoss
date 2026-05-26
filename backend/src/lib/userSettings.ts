@@ -14,10 +14,10 @@ export type UserModelSettings = {
     api_keys: UserApiKeys;
 };
 
-// Title generation is a lightweight task — always routed to the cheapest model
-// of whichever provider the user has keys for: Gemini Flash Lite if Gemini is
-// available, otherwise OpenAI nano, otherwise Claude Haiku. With no user keys
-// set, defaults to Gemini (the dev-mode env fallback).
+// La generacion de titulos es una tarea ligera — siempre se enruta al modelo mas barato
+// del proveedor para el cual el usuario tiene keys: Gemini Flash Lite si Gemini esta
+// disponible, sino OpenAI nano, sino Claude Haiku. Sin keys de usuario configuradas,
+// usa Gemini por defecto (fallback de entorno dev).
 function resolveTitleModel(apiKeys: UserApiKeys): string {
     if (apiKeys.gemini?.trim()) return DEFAULT_TITLE_MODEL;
     if (apiKeys.openai?.trim()) return OPENAI_LOW_MODELS[0];

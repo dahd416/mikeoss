@@ -1,6 +1,6 @@
 # Mike
 
-Mike is a legal document assistant with a Next.js frontend, an Express backend, Supabase Auth/Postgres, and Cloudflare R2-compatible object storage.
+Mike is a legal document assistant with a Next.js frontend, an Express backend, Supabase Auth/Postgres, and AWS S3 (or S3-compatible) object storage.
 
 Website: [mikeoss.com](https://mikeoss.com)
 
@@ -17,7 +17,7 @@ Website: [mikeoss.com](https://mikeoss.com)
 - npm
 - git
 - A Supabase project
-- A Cloudflare R2 bucket, MinIO bucket, or another S3-compatible bucket
+- An AWS S3 bucket, Cloudflare R2 bucket, MinIO bucket, or another S3-compatible bucket
 - At least one supported model provider API key: Anthropic, Google Gemini, or OpenAI
 - LibreOffice installed locally if you need DOC/DOCX to PDF conversion
 
@@ -52,10 +52,11 @@ DOWNLOAD_SIGNING_SECRET=replace-with-a-random-32-byte-hex-string
 SUPABASE_URL=https://your-project.supabase.co
 SUPABASE_SECRET_KEY=your-supabase-service-role-key
 
-R2_ENDPOINT_URL=https://your-account-id.r2.cloudflarestorage.com
-R2_ACCESS_KEY_ID=your-r2-access-key
-R2_SECRET_ACCESS_KEY=your-r2-secret-key
-R2_BUCKET_NAME=mike
+# AWS S3 Storage (supports AWS S3, Cloudflare R2, MinIO, and any S3-compatible service)
+S3_REGION=us-east-1
+S3_ACCESS_KEY_ID=your-aws-access-key
+S3_SECRET_ACCESS_KEY=your-aws-secret-key
+S3_BUCKET_NAME=mike
 
 GEMINI_API_KEY=your-gemini-key
 ANTHROPIC_API_KEY=your-anthropic-key

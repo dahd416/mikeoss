@@ -96,8 +96,8 @@ export default function MikeLayout({
                                 <button
                                     onClick={handleSidebarToggle}
                                     className="flex h-8 w-8 items-center justify-center rounded-full bg-white/70 text-gray-700 shadow-[0_8px_24px_rgba(15,23,42,0.12)] ring-1 ring-white/70 backdrop-blur-md transition-all hover:bg-white/90 active:scale-95"
-                                    title="Open sidebar"
-                                    aria-label="Open sidebar"
+                                    title="Abrir barra lateral"
+                                    aria-label="Abrir barra lateral"
                                 >
                                     <PanelLeft className="h-4 w-4" />
                                 </button>

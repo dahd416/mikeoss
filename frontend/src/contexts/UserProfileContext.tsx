@@ -99,7 +99,7 @@ export function UserProfileProvider({ children }: { children: ReactNode }) {
                 messageCreditsUsed: 0,
                 creditsResetDate: futureResetDate.toISOString(),
                 creditsRemaining: 999999, // temporarily unlimited
-                tier: "Free",
+                tier: "Completo",
                 tabularModel: "gemini-3-flash-preview",
                 apiKeys: emptyApiKeys(),
             });
@@ -244,7 +244,7 @@ export function useUserProfile() {
     const context = useContext(UserProfileContext);
     if (context === undefined) {
         throw new Error(
-            "useUserProfile must be used within a UserProfileProvider",
+            "useUserProfile debe usarse dentro de un UserProfileProvider",
         );
     }
     return context;

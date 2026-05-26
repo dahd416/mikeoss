@@ -36,14 +36,14 @@ export default function SignupPage() {
 
         // Validate passwords match
         if (password !== confirmPassword) {
-            setError("Passwords do not match");
+            setError("Las contraseñas no coinciden");
             setLoading(false);
             return;
         }
 
         // Validate password length
         if (password.length < 6) {
-            setError("Password must be at least 6 characters");
+            setError("La contraseña debe tener al menos 6 caracteres");
             setLoading(false);
             return;
         }
@@ -67,7 +67,7 @@ export default function SignupPage() {
                         });
                     } catch (profileError) {
                         console.error(
-                            "[signup] failed to persist profile fields",
+                            "[signup] error al guardar datos del perfil",
                             profileError,
                         );
                     }
@@ -81,7 +81,7 @@ export default function SignupPage() {
             setError(
                 error instanceof Error
                     ? error.message
-                    : "An error occurred during signup",
+                    : "Ocurrió un error al registrarse",
             );
         } finally {
             setLoading(false);
@@ -101,10 +101,10 @@ export default function SignupPage() {
                             <CheckCircle2 className="h-6 w-6 text-green-600" />
                         </div>
                         <h2 className="text-2xl font-semibold text-gray-900 mb-3">
-                            Account created!
+                            ¡Cuenta creada!
                         </h2>
                         <p className="text-gray-600 leading-relaxed">
-                            Redirecting you to the home page...
+                            Redirigiéndote a la página de inicio...
                         </p>
                     </div>
                 </div>
@@ -122,17 +122,17 @@ export default function SignupPage() {
                 <div className="bg-white border border-gray-200 rounded-2xl p-8 mb-4">
                     <div className="flex justify-between items-center mb-6">
                         <h2 className="text-left text-2xl font-serif">
-                            Create Account
+                            Crear cuenta
                         </h2>
                         <div className="bg-gray-100 p-1 rounded-md flex text-xs font-medium">
                             <Link
                                 href="/login"
                                 className="px-3 py-1 text-gray-500 hover:text-gray-900"
                             >
-                                Log in
+                                Iniciar sesión
                             </Link>
                             <span className="px-3 py-1 bg-white rounded-sm shadow-sm text-gray-900">
-                                Sign up
+                                Registrarse
                             </span>
                         </div>
                     </div>
@@ -143,9 +143,9 @@ export default function SignupPage() {
                                 htmlFor="name"
                                 className="block text-sm font-medium text-gray-700 mb-2"
                             >
-                                Name{" "}
+                                Nombre{" "}
                                 <span className="text-gray-400 font-normal">
-                                    (optional)
+                                    (opcional)
                                 </span>
                             </label>
                             <Input
@@ -153,7 +153,7 @@ export default function SignupPage() {
                                 type="text"
                                 value={name}
                                 onChange={(e) => setName(e.target.value)}
-                                placeholder="Your name"
+                                placeholder="Tu nombre"
                                 className="w-full"
                             />
                         </div>
@@ -163,9 +163,9 @@ export default function SignupPage() {
                                 htmlFor="organisation"
                                 className="block text-sm font-medium text-gray-700 mb-2"
                             >
-                                Organisation{" "}
+                                Organización{" "}
                                 <span className="text-gray-400 font-normal">
-                                    (optional)
+                                    (opcional)
                                 </span>
                             </label>
                             <Input
@@ -175,7 +175,7 @@ export default function SignupPage() {
                                 onChange={(e) =>
                                     setOrganisation(e.target.value)
                                 }
-                                placeholder="Your organisation"
+                                placeholder="Tu organización"
                                 className="w-full"
                             />
                         </div>
@@ -185,14 +185,14 @@ export default function SignupPage() {
                                 htmlFor="email"
                                 className="block text-sm font-medium text-gray-700 mb-2"
                             >
-                                Email
+                                Correo electrónico
                             </label>
                             <Input
                                 id="email"
                                 type="email"
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
-                                placeholder="Enter your email"
+                                placeholder="Ingresa tu correo electrónico"
                                 required
                                 className="w-full"
                             />
@@ -203,14 +203,14 @@ export default function SignupPage() {
                                 htmlFor="password"
                                 className="block text-sm font-medium text-gray-700 mb-2"
                             >
-                                Password
+                                Contraseña
                             </label>
                             <Input
                                 id="password"
                                 type="password"
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
-                                placeholder="Create a password (min. 6 characters)"
+                                placeholder="Crea una contraseña (mín. 6 caracteres)"
                                 required
                                 className="w-full"
                             />
@@ -221,7 +221,7 @@ export default function SignupPage() {
                                 htmlFor="confirmPassword"
                                 className="block text-sm font-medium text-gray-700 mb-2"
                             >
-                                Confirm Password
+                                Confirmar contraseña
                             </label>
                             <Input
                                 id="confirmPassword"
@@ -230,7 +230,7 @@ export default function SignupPage() {
                                 onChange={(e) =>
                                     setConfirmPassword(e.target.value)
                                 }
-                                placeholder="Confirm your password"
+                                placeholder="Confirma tu contraseña"
                                 required
                                 className="w-full"
                             />
@@ -247,37 +247,37 @@ export default function SignupPage() {
                             disabled={loading}
                             className="w-full bg-black hover:bg-gray-900 text-white"
                         >
-                            {loading ? "Creating account..." : "Sign up"}
+                            {loading ? "Creando cuenta..." : "Registrarse"}
                         </Button>
                     </form>
 
                     {/* Terms and Privacy */}
                     <div className="mt-4 text-center text-xs text-gray-500">
-                        By signing up, you agree to our{" "}
+                        Al registrarte, aceptas nuestros{" "}
                         <Link
                             href="https://mikeoss.com/terms"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="text-blue-600 hover:underline"
                         >
-                            Terms of Use
+                            Términos de uso
                         </Link>{" "}
-                        and{" "}
+                        y{" "}
                         <Link
                             href="https://mikeoss.com/privacy"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="text-blue-600 hover:underline"
                         >
-                            Privacy Policy
+                            Política de privacidad
                         </Link>
                     </div>
                 </div>
                 <p className="text-center text-xs text-gray-500 leading-relaxed px-2">
-                    Mike hosted on MikeOSS.com is currently a demo service.
-                    Please do not upload, submit, or store sensitive,
-                    confidential, privileged, client, or personally identifiable
-                    documents.
+                    Mike alojado en MikeOSS.com es actualmente un servicio de
+                    demostración. Por favor, no subas, envíes ni almacenes
+                    documentos sensibles, confidenciales, privilegiados, de
+                    clientes o con información personal identificable.
                 </p>
             </div>
         </div>

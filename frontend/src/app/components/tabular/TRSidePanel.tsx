@@ -110,7 +110,7 @@ export function TRSidePanel({
         preprocessCitations(cell.content?.reasoning ?? "");
 
     useEffect(() => {
-        console.log("[TRSidePanel] summary:", cell.content?.summary ?? "");
+        console.log("[TRSidePanel] resumen:", cell.content?.summary ?? "");
     }, [cell.id, cell.content?.summary]);
 
     return (
@@ -227,7 +227,7 @@ export function TRSidePanel({
                                 }
                             }}
                             disabled={regenerating}
-                            title="Regenerate"
+                            title="Regenerar"
                             className="rounded-lg p-1.5 text-slate-400 transition-colors hover:bg-slate-100 hover:text-slate-600 disabled:opacity-40"
                         >
                             {regenerating ? (
@@ -261,7 +261,7 @@ export function TRSidePanel({
                         {cell.content?.flag && (
                             <div className="mb-5">
                                 <h4 className="mb-2 text-sm font-semibold tracking-wider font-sans">
-                                    Flag
+                                    Indicador
                                 </h4>
                                 <span
                                     className={`inline-flex rounded-full px-3 py-1 text-xs font-semibold ${FLAG_BADGE[cell.content.flag] ?? FLAG_BADGE.grey}`}
@@ -275,8 +275,8 @@ export function TRSidePanel({
                         {/* Results */}
                         <div className="mb-6">
                             <h4 className="mb-2 text-sm font-semibold tracking-wider font-sans">
-                                Results
-                            </h4>
+                                    Resultados
+                                </h4>
                             <div className="text-xs leading-relaxed text-slate-600">
                                 <MarkdownContent
                                     citations={summaryCitations}
@@ -292,7 +292,7 @@ export function TRSidePanel({
                         {cell.content?.reasoning && (
                             <div>
                                 <h4 className="mb-2 text-sm font-semibold tracking-wider font-sans">
-                                    Reasoning
+                                    Razonamiento
                                 </h4>
                                 <div className="text-xs leading-relaxed text-slate-600">
                                     <MarkdownContent

@@ -25,7 +25,7 @@ interface Props {
 export function OwnerOnlyModal({
     open,
     onClose,
-    title = "Owner-only action",
+    title = "Acción exclusiva del propietario",
     action,
     ownerEmail,
     message,
@@ -35,8 +35,8 @@ export function OwnerOnlyModal({
     const body =
         message ??
         (action
-            ? `Only the project owner can ${action}.`
-            : "Only the project owner can perform this action.");
+            ? `Solo el propietario del proyecto puede ${action}.`
+            : "Solo el propietario del proyecto puede realizar esta acción.");
 
     return createPortal(
         <div
@@ -70,9 +70,9 @@ export function OwnerOnlyModal({
                     </p>
                     {ownerEmail && (
                         <p className="mt-2 text-xs text-gray-400">
-                            Ask{" "}
+                            Pide a{" "}
                             <span className="text-gray-600">{ownerEmail}</span>{" "}
-                            if you need access.
+                            si necesitas acceso.
                         </p>
                     )}
                 </div>
@@ -83,7 +83,7 @@ export function OwnerOnlyModal({
                         onClick={onClose}
                         className="rounded-lg bg-gray-900 px-4 py-1.5 text-sm font-medium text-white hover:bg-gray-700"
                     >
-                        OK
+                        Aceptar
                     </button>
                 </div>
             </div>

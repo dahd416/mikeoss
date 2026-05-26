@@ -19,7 +19,7 @@ function findMatch(
         const byId = container.querySelector(
             `${tag}[data-w-id="${opts.w_id}"]`,
         ) as HTMLElement | null;
-        console.log("[EditCard] findMatch by w_id", {
+        console.log("[EditCard] búsqueda por w_id", {
             tag,
             w_id: opts.w_id,
             found: !!byId,
@@ -42,7 +42,7 @@ function findMatch(
             normalizeText(el.textContent ?? "").includes(target),
         ) ??
         null;
-    console.log("[EditCard] findMatch by text", {
+    console.log("[EditCard] búsqueda por texto", {
         tag,
         target,
         found: !!byText,
@@ -117,7 +117,7 @@ export function applyOptimisticResolution(
     const scrolls = document.querySelectorAll(
         `[data-document-id="${CSS.escape(annotation.document_id)}"]`,
     );
-    console.log("[EditCard] optimistic scrolls found:", scrolls.length, {
+    console.log("[EditCard] contenedores optimistas encontrados:", scrolls.length, {
         document_id: annotation.document_id,
         ins_w_id: annotation.ins_w_id,
         del_w_id: annotation.del_w_id,
@@ -237,7 +237,7 @@ export function EditCard({
         try {
             revert = applyOptimisticResolution(annotation, verb);
         } catch (e) {
-            console.error("[EditCard] optimistic update threw", e);
+            console.error("[EditCard] falló la actualización optimista", e);
         }
         try {
             const {
@@ -274,11 +274,11 @@ export function EditCard({
                 downloadUrl: data.download_url,
             });
         } catch (e) {
-            console.error("EditCard resolve failed", e);
+            console.error("EditCard: falló la resolución", e);
             try {
                 revert?.();
             } catch (revertErr) {
-                console.error("[EditCard] revert threw", revertErr);
+                console.error("[EditCard] falló la reversión", revertErr);
             }
             onError?.({
                 editId: annotation.edit_id,
@@ -286,8 +286,8 @@ export function EditCard({
                 versionId: annotation.version_id ?? null,
                 message:
                     verb === "accept"
-                        ? "Couldn't save accept — reverted."
-                        : "Couldn't save reject — reverted.",
+                        ? "No se pudo guardar la aceptación — revertido."
+                        : "No se pudo guardar el rechazo — revertido.",
             });
         } finally {
             setBusy(false);
@@ -319,14 +319,14 @@ export function EditCard({
                     disabled={inFlight || resolved}
                     className="px-2 py-1 text-xs rounded border border-gray-900 bg-gray-900 text-white hover:bg-gray-800 disabled:opacity-50"
                 >
-                    {status === "accepted" ? "Accepted" : "Accept"}
+                    {status === "accepted" ? "Aceptado" : "Aceptar"}
                 </button>
                 <button
                     onClick={() => handle("reject")}
                     disabled={inFlight || resolved}
                     className="px-2 py-1 text-xs rounded border border-gray-200 bg-white text-gray-700 hover:bg-gray-100 disabled:opacity-50"
                 >
-                    {status === "rejected" ? "Rejected" : "Reject"}
+                    {status === "rejected" ? "Rechazado" : "Rechazar"}
                 </button>
                 {onViewClick && (
                     <button
@@ -334,12 +334,12 @@ export function EditCard({
                         disabled={resolved}
                         title={
                             resolved
-                                ? "This change has been resolved and is no longer in the document."
+                                ? "Este cambio ha sido resuelto y ya no está en el documento."
                                 : undefined
                         }
                         className="ml-auto px-2 py-1 text-xs rounded border border-gray-200 bg-white text-gray-700 hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-white"
                     >
-                        View
+                        Ver
                     </button>
                 )}
             </div>

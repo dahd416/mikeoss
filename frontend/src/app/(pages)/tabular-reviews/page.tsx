@@ -24,9 +24,9 @@ const CHECK_W = "w-8 shrink-0";
 const NAME_COL_W = "w-[300px] shrink-0";
 
 const TABS: { id: Tab; label: string }[] = [
-    { id: "all", label: "All" },
-    { id: "in-project", label: "In Project" },
-    { id: "standalone", label: "Standalone" },
+    { id: "all", label: "Todos" },
+    { id: "in-project", label: "En Proyecto" },
+    { id: "standalone", label: "Independiente" },
 ];
 
 function formatDate(iso: string) {
@@ -158,7 +158,7 @@ export default function TabularReviewsPage() {
         const review = reviews.find((r) => r.id === reviewId);
         if (review && user?.id && review.user_id !== user.id) {
             setRenamingId(null);
-            setOwnerOnlyAction("rename this tabular review");
+            setOwnerOnlyAction("renombrar esta revisión tabular");
             return;
         }
         setReviews((prev) =>
@@ -183,7 +183,7 @@ export default function TabularReviewsPage() {
         setReviews((prev) => prev.filter((r) => !owned.includes(r.id)));
         if (blocked > 0) {
             setOwnerOnlyAction(
-                `delete ${blocked} of the selected reviews — only the review creator can delete a review`,
+                `eliminar ${blocked} de las revisiones seleccionadas — solo el creador de la revisión puede eliminarla`,
             );
         }
     }
@@ -198,7 +198,7 @@ export default function TabularReviewsPage() {
                         : "text-gray-500 hover:text-gray-700"
                 }`}
             >
-                {selectedProject ? selectedProject.name : "Filter by project"}
+                {selectedProject ? selectedProject.name                         : "Filtrar por proyecto"}
                 <ChevronDown className="h-3 w-3" />
             </button>
             {filterOpen && (
@@ -210,7 +210,7 @@ export default function TabularReviewsPage() {
                         }}
                         className="flex items-center justify-between w-full px-3 py-2 text-xs text-gray-600 hover:bg-gray-50 transition-colors"
                     >
-                        All Projects
+                        Todos los Proyectos
                         {!projectFilter && (
                             <Check className="h-3.5 w-3.5 text-gray-400" />
                         )}
@@ -246,7 +246,7 @@ export default function TabularReviewsPage() {
                         onClick={() => setActionsOpen((v) => !v)}
                         className="flex items-center gap-1 text-xs font-medium text-gray-700 hover:text-gray-900 transition-colors"
                     >
-                        Actions
+                        Acciones
                         <ChevronDown className="h-3.5 w-3.5" />
                     </button>
                     {actionsOpen && (
@@ -255,7 +255,7 @@ export default function TabularReviewsPage() {
                                 onClick={handleDeleteSelected}
                                 className="w-full px-3 py-1.5 text-left text-xs text-red-600 hover:bg-red-50 transition-colors"
                             >
-                                Delete
+                                Eliminar
                             </button>
                         </div>
                     )}
@@ -270,10 +270,10 @@ export default function TabularReviewsPage() {
             {/* Page header */}
             <div className="mb-1 flex items-center justify-between px-4 py-3 md:px-10">
                 <h1 className="text-2xl font-medium font-serif text-gray-900">
-                    Tabular Reviews
+                    Revisiones Tabulares
                 </h1>
                 <div className="flex items-center gap-2">
-                    <HeaderSearchBtn value={search} onChange={setSearch} placeholder="Search reviews…" />
+                    <HeaderSearchBtn value={search} onChange={setSearch} placeholder="Buscar revisiones…" />
                     <button
                         onClick={() => setNewTROpen(true)}
                         disabled={creating}
@@ -313,12 +313,12 @@ export default function TabularReviewsPage() {
                         )}
                     </div>
                     <div className={`sticky left-8 z-[60] ${NAME_COL_W} bg-white pl-2 text-left`}>
-                        Name
+                        Nombre
                     </div>
-                    <div className="ml-auto w-24 shrink-0">Columns</div>
-                    <div className="w-24 shrink-0">Documents</div>
-                    <div className="w-40 shrink-0">Project</div>
-                    <div className="w-32 shrink-0">Created</div>
+                    <div className="ml-auto w-24 shrink-0">Columnas</div>
+                    <div className="w-24 shrink-0">Documentos</div>
+                    <div className="w-40 shrink-0">Proyecto</div>
+                    <div className="w-32 shrink-0">Creado</div>
                     <div className="w-8 shrink-0" />
                 </div>
 
@@ -355,23 +355,23 @@ export default function TabularReviewsPage() {
                             <>
                                 <Table2 className="h-8 w-8 text-gray-300 mb-4" />
                                 <p className="text-2xl font-medium font-serif text-gray-900">
-                                    Tabular Reviews
+                                    Revisiones Tabulares
                                 </p>
                                 <p className="mt-1 text-xs text-gray-400 max-w-xs text-left">
-                                    Extract data from documents into tables
-                                    using AI.
+                                    Extraer datos de documentos en tablas
+                                    usando IA.
                                 </p>
                                 <button
                                     onClick={() => setNewTROpen(true)}
                                     disabled={creating}
                                     className="mt-4 inline-flex items-center gap-1 rounded-full bg-gray-900 px-3 py-1 text-xs font-medium text-white hover:bg-gray-700 transition-colors shadow-md disabled:opacity-40"
                                 >
-                                    + Create New
+                                    + Crear Nuevo
                                 </button>
                             </>
                         ) : (
                             <p className="text-sm text-gray-400">
-                                No reviews found
+                                No se encontraron revisiones
                             </p>
                         )}
                     </div>
@@ -443,7 +443,7 @@ export default function TabularReviewsPage() {
                                         ) : (
                                             <span className="text-sm text-gray-800 truncate block">
                                                 {review.title ??
-                                                    "Untitled Review"}
+                                                    "Revisión sin título"}
                                             </span>
                                         )}
                                     </div>
@@ -482,13 +482,13 @@ export default function TabularReviewsPage() {
                                                     review.user_id !== user.id
                                                 ) {
                                                     setOwnerOnlyAction(
-                                                        "rename this tabular review",
+                                                        "renombrar esta revisión tabular",
                                                     );
                                                     return;
                                                 }
                                                 setRenameValue(
                                                     review.title ??
-                                                        "Untitled Review",
+                                                        "Revisión sin título",
                                                 );
                                                 setRenamingId(review.id);
                                             }}
@@ -498,7 +498,7 @@ export default function TabularReviewsPage() {
                                                     review.user_id !== user.id
                                                 ) {
                                                     setOwnerOnlyAction(
-                                                        "delete this tabular review",
+                                                        "eliminar esta revisión tabular",
                                                     );
                                                     return;
                                                 }

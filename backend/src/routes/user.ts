@@ -34,7 +34,7 @@ function serializeProfile(
     messageCreditsUsed: creditsUsed,
     creditsResetDate: row.credits_reset_date,
     creditsRemaining: Math.max(MONTHLY_CREDIT_LIMIT - creditsUsed, 0),
-    tier: row.tier || "Free",
+    tier: row.tier || "Completo",
     tabularModel: resolveModel(row.tabular_model, DEFAULT_TABULAR_MODEL),
     ...(apiKeyStatus ? { apiKeyStatus } : {}),
   };
@@ -228,6 +228,12 @@ userRouter.get("/api-keys", requireAuth, async (_req, res) => {
 userRouter.put("/api-keys/:provider", requireAuth, async (req, res) => {
   const userId = res.locals.userId as string;
   const provider = normalizeApiKeyProvider(req.params.provider);
+  console.log("[DEBUG] PUT /user/api-keys/" + provider, {
+    userId,
+    bodyType: typeof req.body,
+    hasApiKey: typeof req.body?.api_key,
+    bodyKeys: Object.keys(req.body || {}),
+  });
   if (!provider)
     return void res.status(400).json({ detail: "Unsupported provider" });
 
@@ -243,6 +249,7 @@ userRouter.put("/api-keys/:provider", requireAuth, async (req, res) => {
     }
     await saveUserApiKey(userId, provider, apiKey, db);
     const status = await getUserApiKeyStatus(userId, db);
+    console.log("[DEBUG] PUT api-keys SUCCESS", { provider, status });
     res.json(status);
   } catch (err) {
     console.error("[user/api-keys] save failed", {

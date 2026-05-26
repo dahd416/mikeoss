@@ -49,9 +49,9 @@ export function RowActionMenuItems({
     deleting,
     onRename,
     onUpdateCmNumber,
-    newSubfolderLabel = "New subfolder",
-    renameLabel = "Rename",
-    deleteLabel = "Delete",
+    newSubfolderLabel = "Nueva subcarpeta",
+    renameLabel = "Renombrar",
+    deleteLabel = "Eliminar",
     onClose,
 }: Props & { onClose: () => void }) {
     return (
@@ -80,7 +80,7 @@ export function RowActionMenuItems({
                     className="flex items-center gap-2 w-full px-3 py-2 text-xs text-gray-600 hover:bg-gray-50 transition-colors"
                 >
                     <Hash className="h-3.5 w-3.5" />
-                    Edit CM No.
+                    Editar No. CM
                 </button>
             )}
             {onDownload && (
@@ -89,7 +89,7 @@ export function RowActionMenuItems({
                     className="flex items-center gap-2 w-full px-3 py-2 text-xs text-gray-600 hover:bg-gray-50 transition-colors"
                 >
                     <Download className="h-3.5 w-3.5" />
-                    Download
+                    Descargar
                 </button>
             )}
             {onShowAllVersions && (
@@ -98,7 +98,7 @@ export function RowActionMenuItems({
                     className="flex items-center gap-2 w-full px-3 py-2 text-xs text-left text-gray-600 hover:bg-gray-50 transition-colors"
                 >
                     <History className="h-3.5 w-3.5 shrink-0" />
-                    Show all versions
+                    Mostrar todas las versiones
                 </button>
             )}
             {onUploadNewVersion && (
@@ -107,7 +107,7 @@ export function RowActionMenuItems({
                     className="flex items-center gap-2 w-full px-3 py-2 text-xs text-left text-gray-600 hover:bg-gray-50 transition-colors"
                 >
                     <Upload className="h-3.5 w-3.5 shrink-0" />
-                    Upload new version
+                    Subir nueva versión
                 </button>
             )}
             {onRemoveFromFolder && (
@@ -116,7 +116,7 @@ export function RowActionMenuItems({
                     className="flex items-center gap-2 w-full px-3 py-2 text-xs text-left text-gray-600 hover:bg-gray-50 transition-colors"
                 >
                     <FolderMinus className="h-3.5 w-3.5 shrink-0" />
-                    Remove from subfolder
+                    Quitar de subcarpeta
                 </button>
             )}
             {onUnhide && (
@@ -125,7 +125,7 @@ export function RowActionMenuItems({
                     className="flex items-center gap-2 w-full px-3 py-2 text-xs text-gray-600 hover:bg-gray-50 transition-colors"
                 >
                     <Eye className="h-3.5 w-3.5" />
-                    Unhide
+                    Mostrar
                 </button>
             )}
             {onHide && (
@@ -134,7 +134,7 @@ export function RowActionMenuItems({
                     className="flex items-center gap-2 w-full px-3 py-2 text-xs text-gray-600 hover:bg-gray-50 transition-colors"
                 >
                     <EyeOff className="h-3.5 w-3.5" />
-                    Hide
+                    Ocultar
                 </button>
             )}
             {onDelete && (

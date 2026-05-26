@@ -126,7 +126,7 @@ export function DocVersionHistory({
                 >
                     <div className="flex items-center gap-2">
                         <Loader2 className="h-3 w-3 animate-spin text-gray-400" />
-                        <span>Loading versions…</span>
+                        <span>Cargando versiones…</span>
                     </div>
                 </div>
             </div>
@@ -144,7 +144,7 @@ export function DocVersionHistory({
                     className={`sticky left-8 z-[60] ${DOC_NAME_COL_W} bg-gray-50/60 p-2`}
                     style={treeNameCellStyle(depth)}
                 >
-                    <div>No version history.</div>
+                    <div>Sin historial de versiones.</div>
                 </div>
             </div>
         );
@@ -228,7 +228,7 @@ export function DocVersionHistory({
                                                 v.display_name ?? "",
                                             );
                                         }}
-                                        title="Rename version"
+                                        title="Renombrar versión"
                                         className="shrink-0 rounded p-0.5 text-gray-400 opacity-0 group-hover:opacity-100 hover:text-gray-700 hover:bg-gray-200 transition"
                                     >
                                         <Pencil className="h-3 w-3" />
@@ -254,7 +254,7 @@ export function DocVersionHistory({
                                     e.stopPropagation();
                                     onDownloadVersion(docId, v.id, filename);
                                 }}
-                                title="Download this version"
+                                title="Descargar esta versión"
                                 className="flex items-center justify-center w-6 h-6 rounded text-gray-500 hover:text-gray-800 hover:bg-gray-100 transition-colors"
                             >
                                 <Download className="h-3.5 w-3.5" />
@@ -272,7 +272,7 @@ export function ProjectPageSkeleton() {
         <div className="flex-1 overflow-y-auto bg-white">
             <div className="mb-1 flex items-start justify-between px-4 py-3 md:px-10">
                 <div className="flex items-center gap-1.5 text-2xl font-medium font-serif">
-                    <span className="text-gray-400">Projects</span>
+                    <span className="text-gray-400">Proyectos</span>
                     <span className="text-gray-300">›</span>
                     <div className="h-6 w-40 rounded bg-gray-100 animate-pulse" />
                 </div>
@@ -364,7 +364,7 @@ export function ProjectPageHeader({
                         onClick={onBackToProjects}
                         className="text-gray-400 hover:text-gray-600 transition-colors"
                     >
-                        Projects
+                        Proyectos
                     </button>
                     <span className="text-gray-300">›</span>
                     {tab !== "documents" ? (
@@ -397,8 +397,8 @@ export function ProjectPageHeader({
                             <span className="text-gray-300">›</span>
                             <span className="text-gray-900">
                                 {tab === "assistant"
-                                    ? "Assistant"
-                                    : "Tabular Reviews"}
+                                    ? "Asistente"
+                                    : "Revisiones tabulares"}
                             </span>
                         </>
                     )}
@@ -408,13 +408,13 @@ export function ProjectPageHeader({
                 <HeaderSearchBtn
                     value={search}
                     onChange={onSearchChange}
-                    placeholder="Search…"
+                    placeholder="Buscar…"
                 />
                 <button
                     onClick={onOpenPeople}
                     className="flex h-8 w-8 items-center justify-center text-sm text-gray-500 transition-colors hover:text-gray-900 cursor-pointer"
-                    title="People with access"
-                    aria-label="People with access"
+                    title="Personas con acceso"
+                    aria-label="Personas con acceso"
                 >
                     <Users className="h-4 w-4" />
                 </button>
@@ -451,11 +451,11 @@ export function ProjectPageHeader({
                         ) : (
                             <Plus className="h-4 w-4" />
                         )}
-                        Tabular Review
+                        Revisión tabular
                     </button>
                     {docsCount === 0 && (
                         <div className="pointer-events-none absolute right-0 top-full mt-1.5 z-10 hidden group-hover:flex items-center whitespace-nowrap rounded-lg bg-gray-900 px-2.5 py-1.5 text-xs text-white shadow-lg">
-                            Upload a document first
+                            Sube un documento primero
                         </div>
                     )}
                 </div>

@@ -73,7 +73,7 @@ export function useFetchSingleDoc(
                     if (!cancelled) setResult({ type: "docx" });
                 }
             } catch {
-                if (!cancelled) setError("Failed to load document.");
+                if (!cancelled) setError("Error al cargar el documento.");
             } finally {
                 if (!cancelled) setLoading(false);
             }

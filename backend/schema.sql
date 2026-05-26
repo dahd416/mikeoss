@@ -14,7 +14,7 @@ create table if not exists public.user_profiles (
   user_id uuid not null unique references auth.users(id) on delete cascade,
   display_name text,
   organisation text,
-  tier text not null default 'Free',
+  tier text not null default 'Completo',
   message_credits_used integer not null default 0,
   credits_reset_date timestamptz not null default (now() + interval '30 days'),
   tabular_model text not null default 'gemini-3-flash-preview',

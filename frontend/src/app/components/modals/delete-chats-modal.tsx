@@ -41,11 +41,11 @@ export function DeleteChatsModal({
                                     <Check className="h-8 w-8 text-green-600" />
                                 </div>
                                 <h2 className="text-3xl font-light font-eb-garamond text-gray-900 mb-2">
-                                    All Chats Deleted
+                                    Todos los chats eliminados
                                 </h2>
                                 <p className="text-gray-600 text-sm">
-                                    Your chat history has been successfully
-                                    deleted.
+                                    Tu historial de chats ha sido eliminado
+                                    exitosamente.
                                 </p>
                             </div>
                         </>
@@ -54,17 +54,17 @@ export function DeleteChatsModal({
                             {/* Header */}
                             <div className="flex items-center justify-between mb-6">
                                 <h2 className="text-4xl font-light font-eb-garamond text-red-700">
-                                    Delete All Chats
+                                    Eliminar todos los chats
                                 </h2>
                             </div>
 
                             {/* Content */}
                             <div className="space-y-4">
                                 <p className="text-gray-600 text-sm leading-relaxed">
-                                    Are you sure you want to delete all{" "}
+                                    ¿Estás seguro de que deseas eliminar todos los{" "}
                                     {chatCount} chat
-                                    {chatCount !== 1 ? "s" : ""}? This action is
-                                    permanent and cannot be undone.
+                                    {chatCount !== 1 ? "s" : ""}? Esta acción es
+                                    permanente y no se puede deshacer.
                                 </p>
 
                                 <div className="space-y-3 pt-4">
@@ -75,8 +75,8 @@ export function DeleteChatsModal({
                                         className="w-full bg-red-600 hover:bg-red-700 text-white"
                                     >
                                         {isDeleting
-                                            ? "Deleting..."
-                                            : "Delete All Chats"}
+                                            ? "Eliminando..."
+                                            : "Eliminar todos los chats"}
                                     </Button>
                                     <Button
                                         onClick={onClose}
@@ -84,7 +84,7 @@ export function DeleteChatsModal({
                                         disabled={isDeleting}
                                         className="w-full border-gray-300 text-gray-700 hover:bg-gray-50"
                                     >
-                                        Cancel
+                                        Cancelar
                                     </Button>
                                 </div>
                             </div>

@@ -149,7 +149,7 @@ export function DocView({
                 // Fall back to scanning all pages for this quote
                 if (hitPage === null) {
                     console.warn(
-                        `Quote not found on hinted page, scanning all pages: "${entry.quote.slice(0, 60)}..."`,
+                        `Cita no encontrada en la página indicada, escaneando todas: "${entry.quote.slice(0, 60)}..."`,
                     );
                     for (let i = 0; i < renderedPagesRef.current.length; i++) {
                         const p = renderedPagesRef.current[i];
@@ -236,7 +236,7 @@ export function DocView({
                         (e as { name?: string })?.name !==
                         "RenderingCancelledException"
                     ) {
-                        console.error("PDF render error", e);
+                        console.error("Error al renderizar PDF", e);
                     }
                     continue;
                 }

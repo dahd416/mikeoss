@@ -159,7 +159,7 @@ async function tagWIdsOnRenderedDom(
         );
         if (!resp.ok) {
             console.warn(
-                "[DocxView] tracked-change-ids fetch failed",
+                "[DocxView] error al obtener tracked-change-ids",
                 resp.status,
             );
             return;
@@ -184,7 +184,7 @@ async function tagWIdsOnRenderedDom(
             tagged++;
         }
     } catch (e) {
-        console.warn("[DocxView] tagWIdsOnRenderedDom failed", e);
+        console.warn("[DocxView] tagWIdsOnRenderedDom falló", e);
     }
 }
 
@@ -347,7 +347,7 @@ export function DocxView({
         const scrollEl = scrollRef.current;
         const containerEl = containerRef.current;
 
-        console.log("[DocxView] render effect fired", {
+        console.log("[DocxView] efecto de renderizado ejecutado", {
             documentId,
             versionId,
             refetchKey,
@@ -417,7 +417,7 @@ export function DocxView({
                     onReadyRef.current?.();
                 });
             } catch (e) {
-                console.error("docx-preview render failed", e);
+                console.error("Error al renderizar docx-preview", e);
             }
         })();
 
@@ -480,7 +480,7 @@ export function DocxView({
                         type="button"
                         onClick={() => onWarningDismiss?.()}
                         className="text-amber-600 hover:text-amber-900"
-                        aria-label="Dismiss warning"
+                        aria-label="Descartar advertencia"
                     >
                         ×
                     </button>

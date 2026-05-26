@@ -152,7 +152,7 @@ export function ProjectPage({ projectId, initialTab = "documents" }: Props) {
                 return next;
             });
         } catch (e) {
-            console.error("listDocumentVersions failed", e);
+            console.error("listDocumentVersions falló", e);
         } finally {
             setLoadingVersionDocIds((prev) => {
                 const next = new Set(prev);
@@ -177,7 +177,7 @@ export function ProjectPage({ projectId, initialTab = "documents" }: Props) {
             a.download = resolved.filename || filename;
             a.click();
         } catch (e) {
-            console.error("downloadDocVersion failed", e);
+            console.error("downloadDocVersion falló", e);
         }
     }
 
@@ -216,7 +216,7 @@ export function ProjectPage({ projectId, initialTab = "documents" }: Props) {
                 return next;
             });
         } catch (e) {
-            console.error("uploadDocumentVersion failed", e);
+            console.error("uploadDocumentVersion falló", e);
         }
     }
 
@@ -245,7 +245,7 @@ export function ProjectPage({ projectId, initialTab = "documents" }: Props) {
                 return next;
             });
         } catch (e) {
-            console.error("renameDocumentVersion failed", e);
+            console.error("renameDocumentVersion falló", e);
         }
     }
 
@@ -484,7 +484,7 @@ export function ProjectPage({ projectId, initialTab = "documents" }: Props) {
                     : prev,
             );
         } catch (e) {
-            console.error("renameProjectDocument failed", e);
+            console.error("renameProjectDocument falló", e);
             setProject((prev) =>
                 prev && previous
                     ? {
@@ -503,7 +503,7 @@ export function ProjectPage({ projectId, initialTab = "documents" }: Props) {
         // Backend only lets the doc creator delete. Warn the requester
         // instead of letting the request 404 silently.
         if (doc && user?.id && doc.user_id && doc.user_id !== user.id) {
-            setOwnerOnlyAction("delete this document");
+            setOwnerOnlyAction("eliminar este documento");
             return;
         }
         await deleteDocument(docId);
@@ -554,7 +554,7 @@ export function ProjectPage({ projectId, initialTab = "documents" }: Props) {
         // Server-side this would 404 silently for non-owners; surface a
         // clear permission warning instead.
         if (project && project.is_owner === false) {
-            setOwnerOnlyAction("rename this project");
+            setOwnerOnlyAction("renombrar este proyecto");
             return;
         }
         setProject((prev) => (prev ? { ...prev, name: newName } : prev));
@@ -567,7 +567,7 @@ export function ProjectPage({ projectId, initialTab = "documents" }: Props) {
         if (!trimmed) return;
         const chat = chats.find((c) => c.id === chatId);
         if (chat && user?.id && chat.user_id !== user.id) {
-            setOwnerOnlyAction("rename this chat");
+            setOwnerOnlyAction("renombrar este chat");
             return;
         }
         setChats((prev) => prev.map((c) => (c.id === chatId ? { ...c, title: trimmed } : c)));
@@ -580,7 +580,7 @@ export function ProjectPage({ projectId, initialTab = "documents" }: Props) {
         if (!trimmed) return;
         const review = projectReviews.find((r) => r.id === reviewId);
         if (review && user?.id && review.user_id !== user.id) {
-            setOwnerOnlyAction("rename this tabular review");
+            setOwnerOnlyAction("renombrar esta revisión tabular");
             return;
         }
         setProjectReviews((prev) => prev.map((r) => (r.id === reviewId ? { ...r, title: trimmed } : r)));
@@ -636,7 +636,7 @@ export function ProjectPage({ projectId, initialTab = "documents" }: Props) {
         );
         if (blocked > 0) {
             setOwnerOnlyAction(
-                `delete ${blocked} of the selected documents — only the document creator can delete a document`,
+                `eliminar ${blocked} de los documentos seleccionados — solo el creador del documento puede eliminarlo`,
             );
         }
     }
@@ -654,7 +654,7 @@ export function ProjectPage({ projectId, initialTab = "documents" }: Props) {
         setChats((prev) => prev.filter((c) => !owned.includes(c.id)));
         if (blocked > 0) {
             setOwnerOnlyAction(
-                `delete ${blocked} of the selected chats — only the chat creator can delete a chat`,
+                `eliminar ${blocked} de los chats seleccionados — solo el creador del chat puede eliminarlo`,
             );
         }
     }
@@ -672,14 +672,14 @@ export function ProjectPage({ projectId, initialTab = "documents" }: Props) {
         setProjectReviews((prev) => prev.filter((r) => !owned.includes(r.id)));
         if (blocked > 0) {
             setOwnerOnlyAction(
-                `delete ${blocked} of the selected reviews — only the review creator can delete a review`,
+                `eliminar ${blocked} de las revisiones seleccionadas — solo el creador de la revisión puede eliminarla`,
             );
         }
     }
 
     async function handleDeleteChatRow(chat: MikeChat) {
         if (user?.id && chat.user_id !== user.id) {
-            setOwnerOnlyAction("delete this chat");
+            setOwnerOnlyAction("eliminar este chat");
             return;
         }
         await deleteChat(chat.id);
@@ -688,7 +688,7 @@ export function ProjectPage({ projectId, initialTab = "documents" }: Props) {
 
     async function handleDeleteReviewRow(review: TabularReview) {
         if (user?.id && review.user_id !== user.id) {
-            setOwnerOnlyAction("delete this tabular review");
+            setOwnerOnlyAction("eliminar esta revisión tabular");
             return;
         }
         await deleteTabularReview(review.id);
@@ -730,7 +730,7 @@ export function ProjectPage({ projectId, initialTab = "documents" }: Props) {
             invalidateDirectoryCache();
             handleDocsSelected(uploaded);
         } catch (err) {
-            console.error("Project document drop upload failed", err);
+            console.error("Error al subir documento arrastrado al proyecto", err);
         } finally {
             setUploadingDroppedFilenames([]);
         }
@@ -786,7 +786,7 @@ export function ProjectPage({ projectId, initialTab = "documents" }: Props) {
                         <input
                             autoFocus
                             className="flex-1 min-w-0 text-sm text-gray-800 bg-transparent outline-none border-b border-gray-300"
-                            placeholder="Folder name"
+                            placeholder="Nombre de la carpeta"
                             value={newFolderName}
                             onChange={(e) => setNewFolderName(e.target.value)}
                             onKeyDown={(e) => {
@@ -835,10 +835,10 @@ export function ProjectPage({ projectId, initialTab = "documents" }: Props) {
                     </div>
                 </div>
                 <div className="ml-auto w-20 shrink-0 text-xs text-gray-300 uppercase truncate">
-                    {filename.includes(".") ? filename.split(".").pop() : "file"}
+                    {filename.includes(".") ? filename.split(".").pop() : "archivo"}
                 </div>
                 <div className="w-24 shrink-0 text-sm text-gray-300">
-                    Uploading
+                    Subiendo
                 </div>
                 <div className="w-20 shrink-0 text-sm text-gray-300">—</div>
                 <div className="w-32 shrink-0 text-sm text-gray-300">—</div>
@@ -1003,7 +1003,7 @@ export function ProjectPage({ projectId, initialTab = "documents" }: Props) {
                                                 setRenameDocumentValue(doc.filename);
                                                 setRenamingDocumentId(doc.id);
                                             }}
-                                            renameLabel="Rename document"
+                                            renameLabel="Renombrar documento"
                                             onDownload={() => downloadDoc(doc.id)}
                                             onShowAllVersions={
                                                 hasVersions && !isVersionsOpen
@@ -1154,7 +1154,7 @@ export function ProjectPage({ projectId, initialTab = "documents" }: Props) {
     if (!project) {
         return (
             <div className="flex h-full items-center justify-center">
-                <p className="text-gray-400">Project not found</p>
+                <p className="text-gray-400">Proyecto no encontrado</p>
             </div>
         );
     }
@@ -1188,7 +1188,7 @@ export function ProjectPage({ projectId, initialTab = "documents" }: Props) {
                 onClick={() => setActionsOpen((v) => !v)}
                 className="flex items-center gap-1 text-xs font-medium text-gray-700 hover:text-gray-900 transition-colors"
             >
-                Actions
+                Acciones
                 <ChevronDown className="h-3.5 w-3.5" />
             </button>
             {actionsOpen && (
@@ -1198,7 +1198,7 @@ export function ProjectPage({ projectId, initialTab = "documents" }: Props) {
                             onClick={handleDownloadSelectedDocs}
                             className="w-full px-3 py-1.5 text-left text-xs text-gray-600 hover:bg-gray-50 transition-colors"
                         >
-                            Download
+                            Descargar
                         </button>
                     )}
                     {tab === "documents" && selectedDocIds.some((id) => docs.find((d) => d.id === id)?.folder_id != null) && (
@@ -1206,14 +1206,14 @@ export function ProjectPage({ projectId, initialTab = "documents" }: Props) {
                             onClick={handleRemoveSelectedFromFolder}
                             className="w-full px-3 py-1.5 text-left text-xs text-gray-600 hover:bg-gray-50 transition-colors"
                         >
-                            Remove from subfolder
+                            Quitar de subcarpeta
                         </button>
                     )}
                     <button
                         onClick={handleDeleteSelected}
                         className="w-full px-3 py-1.5 text-left text-xs text-red-600 hover:bg-red-50 transition-colors"
                     >
-                        Delete
+                        Eliminar
                     </button>
                 </div>
             )}
@@ -1230,14 +1230,14 @@ export function ProjectPage({ projectId, initialTab = "documents" }: Props) {
                         className="flex items-center gap-1 text-xs font-medium text-gray-500 hover:text-gray-700 transition-colors"
                     >
                         <FolderPlus className="h-3.5 w-3.5" />
-                        Add Subfolder
+                        Agregar subcarpeta
                     </button>
                     <button
                         onClick={() => setAddDocsOpen(true)}
                         className="flex items-center gap-1 text-xs font-medium text-gray-500 hover:text-gray-700 transition-colors"
                     >
                         <Upload className="h-3.5 w-3.5" />
-                        Add Documents
+                        Agregar documentos
                     </button>
                 </>
             )}
@@ -1264,9 +1264,9 @@ export function ProjectPage({ projectId, initialTab = "documents" }: Props) {
 
             <ToolbarTabs
                 tabs={[
-                    { id: "documents", label: "Documents" },
-                    { id: "assistant", label: "Assistant" },
-                    { id: "reviews", label: "Tabular Reviews" },
+                    { id: "documents", label: "Documentos" },
+                    { id: "assistant", label: "Asistente" },
+                    { id: "reviews", label: "Revisiones tabulares" },
                 ]}
                 active={tab}
                 onChange={handleTabChange}
@@ -1299,13 +1299,13 @@ export function ProjectPage({ projectId, initialTab = "documents" }: Props) {
                                 />
                             </div>
                             <div className={`sticky left-8 z-[60] ${DOC_NAME_COL_W} bg-white pl-2 text-left`}>
-                                Name
+                                Nombre
                             </div>
-                            <div className="ml-auto w-20 shrink-0 text-left">Type</div>
-                            <div className="w-24 shrink-0 text-left">Size</div>
-                            <div className="w-20 shrink-0 text-left">Version</div>
-                            <div className="w-32 shrink-0 text-left">Created</div>
-                            <div className="w-32 shrink-0 text-left">Updated</div>
+                            <div className="ml-auto w-20 shrink-0 text-left">Tipo</div>
+                            <div className="w-24 shrink-0 text-left">Tamaño</div>
+                            <div className="w-20 shrink-0 text-left">Versión</div>
+                            <div className="w-32 shrink-0 text-left">Creado</div>
+                            <div className="w-32 shrink-0 text-left">Actualizado</div>
                             <div className="w-8 shrink-0" />
                         </div>
 
@@ -1351,7 +1351,7 @@ export function ProjectPage({ projectId, initialTab = "documents" }: Props) {
                                 className="flex-1 flex cursor-pointer flex-col items-center justify-center py-24 text-center"
                             >
                                 <Upload className="h-8 w-8 text-gray-200 mb-3" />
-                                <p className="text-sm text-gray-400">Drop PDF or DOCX files here</p>
+                                <p className="text-sm text-gray-400">Suelta archivos PDF o DOCX aquí</p>
                             </div>
                         ) : (
                             <div
@@ -1494,7 +1494,7 @@ export function ProjectPage({ projectId, initialTab = "documents" }: Props) {
                                                                     setRenameDocumentValue(doc.filename);
                                                                     setRenamingDocumentId(doc.id);
                                                                 }}
-                                                                renameLabel="Rename document"
+                                                                renameLabel="Renombrar documento"
                                                                 onDownload={() => downloadDoc(doc.id)}
                                                                 onShowAllVersions={
                                                                     hasVersions && !isVersionsOpen
@@ -1568,7 +1568,7 @@ export function ProjectPage({ projectId, initialTab = "documents" }: Props) {
                                                         menuDoc.id,
                                                     );
                                                 }}
-                                                renameLabel="Rename document"
+                                                renameLabel="Renombrar documento"
                                                 onDownload={() => downloadDoc(menuDoc.id)}
                                                 onShowAllVersions={
                                                     menuDocHasVersions && !menuDocVersionsOpen
@@ -1610,8 +1610,8 @@ export function ProjectPage({ projectId, initialTab = "documents" }: Props) {
                                                 }}
                                                 newSubfolderLabel={
                                                     contextMenu.showFolderActions
-                                                        ? "New subfolder inside"
-                                                        : "New subfolder"
+                                                        ? "Nueva subcarpeta dentro"
+                                                        : "Nueva subcarpeta"
                                                 }
                                                 onRename={
                                                     contextMenu.showFolderActions &&
@@ -1632,7 +1632,7 @@ export function ProjectPage({ projectId, initialTab = "documents" }: Props) {
                                                           }
                                                         : undefined
                                                 }
-                                                renameLabel="Rename folder"
+                                                renameLabel="Renombrar carpeta"
                                                 onDelete={
                                                     contextMenu.showFolderActions &&
                                                     contextMenu.folderId
@@ -1642,7 +1642,7 @@ export function ProjectPage({ projectId, initialTab = "documents" }: Props) {
                                                               )
                                                         : undefined
                                                 }
-                                                deleteLabel="Delete folder"
+                                                deleteLabel="Eliminar carpeta"
                                             />
                                         )}
                                     </div>
@@ -1713,7 +1713,7 @@ export function ProjectPage({ projectId, initialTab = "documents" }: Props) {
                 open={addDocsOpen}
                 onClose={() => setAddDocsOpen(false)}
                 onSelect={handleDocsSelected}
-                breadcrumb={["Projects", project.name + (project.cm_number ? ` (${project.cm_number})` : ""), "Add Documents"]}
+                breadcrumb={["Proyectos", project.name + (project.cm_number ? ` (${project.cm_number})` : ""), "Agregar documentos"]}
                 projectId={projectId}
             />
 
@@ -1759,12 +1759,12 @@ export function ProjectPage({ projectId, initialTab = "documents" }: Props) {
                 fetchPeople={getProjectPeople}
                 currentUserEmail={user?.email ?? null}
                 breadcrumb={[
-                    "Projects",
+                    "Proyectos",
                     project
                         ? project.name +
                           (project.cm_number ? ` (${project.cm_number})` : "")
                         : "",
-                    "People",
+                    "Personas",
                 ]}
                 // Only owners may modify the member list. Without this prop
                 // PeopleModal renders read-only — non-owners can still see

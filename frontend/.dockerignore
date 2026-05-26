@@ -1,0 +1,12 @@
+node_modules
+.next
+.env.local
+.env
+*.log
+.DS_Store
+.git
+.gitignore
+bun.lock
+open-next.config.ts
+wrangler.toml
+cloudflare-env.d.ts

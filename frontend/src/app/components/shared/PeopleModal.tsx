@@ -165,7 +165,7 @@ export function PeopleModal({
             setError(
                 e instanceof Error
                     ? e.message
-                    : "Couldn't add the member. Try again.",
+                    : "No se pudo agregar al miembro. Inténtalo de nuevo.",
             );
         } finally {
             setBusy(null);
@@ -186,7 +186,7 @@ export function PeopleModal({
             setError(
                 e instanceof Error
                     ? e.message
-                    : "Couldn't remove the member. Try again.",
+                    : "No se pudo eliminar al miembro. Inténtalo de nuevo.",
             );
         } finally {
             setBusy(null);
@@ -223,7 +223,7 @@ export function PeopleModal({
                                 <UserPlus className="h-3.5 w-3.5 text-gray-400 shrink-0" />
                                 <input
                                     type="email"
-                                    placeholder="Add by email…"
+                                    placeholder="Agregar por correo…"
                                     value={newEmail}
                                     onChange={(e) =>
                                         setNewEmail(e.target.value)
@@ -238,7 +238,7 @@ export function PeopleModal({
                             <button
                                 onClick={() => void handleAdd()}
                                 disabled={!canAdd}
-                                title="Add member"
+                                title="Agregar miembro"
                                 className="inline-flex items-center justify-center rounded-lg border border-gray-900 bg-gray-900 p-2 text-white hover:bg-gray-800 disabled:opacity-50 disabled:cursor-not-allowed"
                             >
                                 {busy === "add" ? (
@@ -250,17 +250,17 @@ export function PeopleModal({
                         </div>
                         {alreadyShared && trimmedNewEmail && (
                             <p className="mt-1.5 text-xs text-gray-400">
-                                {trimmedNewEmail} already has access.
+                                {trimmedNewEmail} ya tiene acceso.
                             </p>
                         )}
                         {isOwnerEmail && trimmedNewEmail && (
                             <p className="mt-1.5 text-xs text-gray-400">
-                                {trimmedNewEmail} is the owner.
+                                {trimmedNewEmail} es el propietario.
                             </p>
                         )}
                         {isSelfEmail && !isOwnerEmail && trimmedNewEmail && (
                             <p className="mt-1.5 text-xs text-gray-400">
-                                You cannot share this with yourself.
+                                No puedes compartir esto contigo mismo.
                             </p>
                         )}
                         {trimmedNewEmail &&
@@ -269,7 +269,7 @@ export function PeopleModal({
                             !isOwnerEmail &&
                             !isSelfEmail && (
                                 <p className="mt-1.5 text-xs text-gray-400">
-                                    Enter a valid email.
+                                    Ingresa un correo electrónico válido.
                                 </p>
                             )}
                         {error && (
@@ -283,7 +283,7 @@ export function PeopleModal({
                 {/* Section heading */}
                 <div className="px-4 pt-3 pb-1 flex items-center gap-2">
                     <h3 className="text-xs font-medium text-gray-500">
-                        People with Access
+                        Personas con acceso
                     </h3>
                     {peopleLoading && (
                         <Loader2 className="h-3 w-3 animate-spin text-gray-400" />
@@ -294,7 +294,7 @@ export function PeopleModal({
                 <div className="flex-1 overflow-y-auto px-4 pb-2">
                     {roster.length === 0 ? (
                         <div className="flex h-full items-center justify-center text-sm text-gray-400">
-                            No one has access yet.
+                            Nadie tiene acceso aún.
                         </div>
                     ) : (
                         <ul className="divide-y divide-gray-100 [&>li:nth-child(2)]:border-t-0">
@@ -324,12 +324,12 @@ export function PeopleModal({
                                                 {primary}
                                                 {isYou && (
                                                     <span className="ml-1.5 text-xs text-gray-400">
-                                                        (You)
+                                                        (Tú)
                                                     </span>
                                                 )}
                                                 {entry.role === "owner" && (
                                                     <span className="ml-1.5 text-[10px] text-gray-400">
-                                                        Owner
+                                                        Propietario
                                                     </span>
                                                 )}
                                             </p>
@@ -348,13 +348,13 @@ export function PeopleModal({
                                                         )
                                                     }
                                                     disabled={busy !== null}
-                                                    title="Remove access"
+                                                    title="Quitar acceso"
                                                     className="self-center inline-flex items-center gap-1 rounded px-2 py-1 text-xs text-gray-500 hover:bg-red-50 hover:text-red-600 disabled:opacity-50"
                                                 >
                                                     {isRemoving && (
                                                         <Loader2 className="h-3 w-3 animate-spin" />
                                                     )}
-                                                    Remove
+                                                    Quitar
                                                 </button>
                                             )}
                                     </li>
@@ -367,10 +367,10 @@ export function PeopleModal({
                 {/* Footer */}
                 <div className="px-5 py-3 text-[11px] text-gray-400">
                     {roster.length === 0
-                        ? "No one has access yet."
+                        ? "Nadie tiene acceso aún."
                         : `${roster.length} ${
-                              roster.length === 1 ? "person" : "people"
-                          } with access.`}
+                              roster.length === 1 ? "persona" : "personas"
+                          } con acceso.`}
                 </div>
             </div>
         </div>,

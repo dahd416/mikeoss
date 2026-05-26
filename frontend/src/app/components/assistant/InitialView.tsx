@@ -25,7 +25,7 @@ export function InitialView({ onSubmit }: InitialViewProps) {
     const textRef = useRef<HTMLHeadingElement>(null);
 
     const username =
-        profile?.displayName?.trim() || user?.email?.split("@")[0] || "there";
+        profile?.displayName?.trim() || user?.email?.split("@")[0] || "tú";
 
     useLayoutEffect(() => {
         if (!profile || !textRef.current) return;
@@ -71,7 +71,7 @@ export function InitialView({ onSubmit }: InitialViewProps) {
                                     "transform 900ms cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 800ms ease-in-out 300ms",
                             }}
                         >
-                            Hi, {username}
+                            Hola, {username}
                         </h1>
                     </div>
 
@@ -84,8 +84,13 @@ export function InitialView({ onSubmit }: InitialViewProps) {
 
                     <div className="text-center">
                         <p className="text-xs py-3 mb-3 text-gray-500">
-                            AI can make mistakes. Answers are not legal advice.
+                            La IA puede cometer errores. Las respuestas no constituyen asesoría legal.
                         </p>
+                    </div>
+
+                    <div className="flex flex-col items-center gap-1 opacity-30 hover:opacity-50 transition-opacity mt-6">
+                        <span className="text-[10px] tracking-[0.2em] text-gray-400 font-medium">POWERED BY</span>
+                        <img src="/orviti.svg" alt="Orviti" className="h-3 w-auto" />
                     </div>
                 </div>
             </div>

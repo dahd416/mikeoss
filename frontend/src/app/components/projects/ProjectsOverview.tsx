@@ -63,10 +63,10 @@ export function ProjectsOverview() {
                 if (!cancelled) setProjects(loaded);
             })
             .catch((err) => {
-                console.error("[projects] failed to load projects", err);
+                console.error("[projects] error al cargar los proyectos", err);
                 if (!cancelled) {
                     setProjects([]);
-                    setLoadError("Could not load projects.");
+                    setLoadError("No se pudieron cargar los proyectos.");
                 }
             })
             .finally(() => {
@@ -129,9 +129,9 @@ export function ProjectsOverview() {
     }
 
     const tabs: { id: Tab; label: string }[] = [
-        { id: "all", label: "All" },
-        { id: "mine", label: "Mine" },
-        { id: "shared-with-me", label: "Shared with me" },
+        { id: "all", label: "Todos" },
+        { id: "mine", label: "Míos" },
+        { id: "shared-with-me", label: "Compartidos conmigo" },
     ];
 
     async function handleRenameSubmit(projectId: string) {
@@ -171,7 +171,7 @@ export function ProjectsOverview() {
         setProjects((prev) => prev.filter((p) => !owned.includes(p.id)));
         if (blocked > 0) {
             setOwnerOnlyAction(
-                `delete ${blocked} of the selected projects — only the project owner can delete a project`,
+                `eliminar ${blocked} de los proyectos seleccionados — solo el propietario del proyecto puede eliminarlo`,
             );
         }
     }
@@ -184,7 +184,7 @@ export function ProjectsOverview() {
                         onClick={() => setActionsOpen((v) => !v)}
                         className="flex items-center gap-1 text-xs font-medium text-gray-700 hover:text-gray-900 transition-colors"
                     >
-                        Actions
+                        Acciones
                         <ChevronDown className="h-3.5 w-3.5" />
                     </button>
                     {actionsOpen && (
@@ -193,7 +193,7 @@ export function ProjectsOverview() {
                                 onClick={handleDeleteSelected}
                                 className="w-full px-3 py-1.5 text-left text-xs text-red-600 hover:bg-red-50 transition-colors"
                             >
-                                Delete
+                                Eliminar
                             </button>
                         </div>
                     )}
@@ -207,13 +207,13 @@ export function ProjectsOverview() {
             {/* Page header */}
             <div className="mb-1 flex items-center justify-between px-4 py-3 md:px-10">
                 <h1 className="text-2xl font-medium font-serif text-gray-900">
-                    Projects
+                    Proyectos
                 </h1>
                 <div className="flex items-center gap-2">
                     <HeaderSearchBtn
                         value={search}
                         onChange={setSearch}
-                        placeholder="Search projects…"
+                        placeholder="Buscar proyectos…"
                     />
                     <button
                         onClick={() => setModalOpen(true)}
@@ -250,15 +250,15 @@ export function ProjectsOverview() {
                         )}
                     </div>
                     <div className={`sticky left-8 z-[60] ${NAME_COL_W} bg-white pl-2 text-left`}>
-                        Name
+                        Nombre
                     </div>
                     <div className="ml-auto w-32 shrink-0 text-left">CM</div>
-                    <div className="w-24 shrink-0 text-left">Files</div>
+                    <div className="w-24 shrink-0 text-left">Archivos</div>
                     <div className="w-24 shrink-0 text-left">Chats</div>
                     <div className="w-36 shrink-0 text-left">
-                        Tabular Reviews
+                        Revisiones tabulares
                     </div>
-                    <div className="w-32 shrink-0 text-left">Created</div>
+                    <div className="w-32 shrink-0 text-left">Creado</div>
                     <div className="w-8 shrink-0" />
                 </div>
 
@@ -296,7 +296,7 @@ export function ProjectsOverview() {
                     <div className="flex flex-col items-start py-24 w-full max-w-xs mx-auto">
                         <FolderOpen className="h-8 w-8 text-gray-300 mb-4" />
                         <p className="text-2xl font-medium font-serif text-gray-900">
-                            Projects
+                            Proyectos
                         </p>
                         <p className="mt-1 text-xs text-red-500 max-w-xs">
                             {loadError}
@@ -308,23 +308,22 @@ export function ProjectsOverview() {
                             <>
                                 <FolderOpen className="h-8 w-8 text-gray-300 mb-4" />
                                 <p className="text-2xl font-medium font-serif text-gray-900">
-                                    Projects
+                                    Proyectos
                                 </p>
                                 <p className="mt-1 text-xs text-gray-400 max-w-xs">
-                                    Upload documents into projects and to
-                                    commence chats and tabular reviews with
-                                    them.
+                                    Sube documentos a proyectos para iniciar
+                                    chats y revisiones tabulares con ellos.
                                 </p>
                                 <button
                                     onClick={() => setModalOpen(true)}
                                     className="mt-4 inline-flex items-center gap-1 rounded-full bg-gray-900 px-3 py-1 text-xs font-medium text-white hover:bg-gray-700 transition-colors shadow-md"
                                 >
-                                    + Create New
+                                    + Crear nuevo
                                 </button>
                             </>
                         ) : (
                             <p className="text-sm text-gray-400">
-                                No {activeTab} projects
+                                No hay proyectos {activeTab}
                             </p>
                         )}
                     </div>

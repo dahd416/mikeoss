@@ -19,16 +19,16 @@ import { PreResponseWrapper } from "../shared/PreResponseWrapper";
 import { supabase } from "@/lib/supabase";
 
 function toolCallLabel(name: string): string {
-    if (name === "generate_docx") return "Creating document...";
-    if (name === "edit_document") return "Editing document...";
-    if (name === "read_document") return "Reading document...";
-    if (name === "fetch_documents") return "Reading documents...";
-    if (name === "find_in_document") return "Searching document...";
-    if (name === "replicate_document") return "Copying document...";
-    if (name === "read_workflow") return "Loading workflow...";
-    if (name === "list_workflows") return "Loading workflows...";
-    if (name === "list_documents") return "Loading documents...";
-    return name ? `Running ${name}...` : "Working...";
+    if (name === "generate_docx") return "Creando documento...";
+    if (name === "edit_document") return "Editando documento...";
+    if (name === "read_document") return "Leyendo documento...";
+    if (name === "fetch_documents") return "Leyendo documentos...";
+    if (name === "find_in_document") return "Buscando en documento...";
+    if (name === "replicate_document") return "Copiando documento...";
+    if (name === "read_workflow") return "Cargando flujo de trabajo...";
+    if (name === "list_workflows") return "Cargando flujos de trabajo...";
+    if (name === "list_documents") return "Cargando documentos...";
+    return name ? `Ejecutando ${name}...` : "Trabajando...";
 }
 
 /**
@@ -111,7 +111,7 @@ function BulkEditActions({
                     revert = applyOptimisticResolution(annotation, verb);
                 } catch (e) {
                     console.error(
-                        "[BulkEditActions] optimistic update threw",
+                        "[BulkEditActions] falló la actualización optimista",
                         e,
                     );
                 }
@@ -143,12 +143,12 @@ function BulkEditActions({
                         downloadUrl: data.download_url,
                     });
                 } catch (e) {
-                    console.error("[BulkEditActions] resolve failed", e);
+                    console.error("[BulkEditActions] falló la resolución", e);
                     try {
                         revert?.();
                     } catch (revertErr) {
                         console.error(
-                            "[BulkEditActions] revert threw",
+                            "[BulkEditActions] falló la reversión",
                             revertErr,
                         );
                     }
@@ -158,8 +158,8 @@ function BulkEditActions({
                         versionId: annotation.version_id ?? null,
                         message:
                             verb === "accept"
-                                ? "Couldn't save one or more accepts."
-                                : "Couldn't save one or more rejects.",
+                                ? "No se pudieron guardar una o más aceptaciones."
+                                : "No se pudieron guardar uno o más rechazos.",
                     });
                 }
                 done++;
@@ -185,7 +185,7 @@ function BulkEditActions({
                 {busy === "accept" && (
                     <Loader2 className="h-3 w-3 animate-spin" />
                 )}
-                Accept all
+                Aceptar todo
             </button>
             <button
                 onClick={() => handleAll("reject")}
@@ -195,7 +195,7 @@ function BulkEditActions({
                 {busy === "reject" && (
                     <Loader2 className="h-3 w-3 animate-spin" />
                 )}
-                Reject all
+                Rechazar todo
             </button>
             {progress && (
                 <span className="text-xs font-serif text-gray-500">
@@ -210,7 +210,7 @@ function BulkEditActions({
                     disabled={!!busy}
                     className="ml-auto px-2 py-1 text-xs rounded border border-gray-200 bg-white text-gray-700 hover:bg-gray-100 disabled:opacity-50"
                 >
-                    View
+                    Ver
                 </button>
             )}
         </div>
@@ -266,11 +266,11 @@ function EditCardsSection({
     const summary =
         pending.length > 0
             ? docCount > 1
-                ? `${pending.length} tracked changes across ${docCount} documents`
-                : `${pending.length} tracked ${pending.length === 1 ? "change" : "changes"}`
+                ? `${pending.length} cambios con seguimiento en ${docCount} documentos`
+                : `${pending.length} ${pending.length === 1 ? "cambio con seguimiento" : "cambios con seguimiento"}`
             : docCount > 1
-              ? `${resolvedCount} resolved tracked changes across ${docCount} documents`
-              : `${resolvedCount} resolved tracked ${resolvedCount === 1 ? "change" : "changes"}`;
+              ? `${resolvedCount} cambios resueltos en ${docCount} documentos`
+              : `${resolvedCount} ${resolvedCount === 1 ? "cambio resuelto" : "cambios resueltos"}`;
 
     return (
         <div className="border border-gray-200 rounded-lg bg-white overflow-hidden">
@@ -281,7 +281,7 @@ function EditCardsSection({
                 </p>
                 <button
                     onClick={() => setIsOpen((v) => !v)}
-                    aria-label={isOpen ? "Collapse edits" : "Expand edits"}
+                    aria-label={isOpen ? "Colapsar ediciones" : "Expandir ediciones"}
                     className="shrink-0 rounded p-1 text-gray-500 hover:bg-gray-100 hover:text-gray-800 transition-colors"
                 >
                     <ChevronDown
@@ -358,11 +358,11 @@ function ResponseStatus({ status }: { status: StatusState }) {
 // ---------------------------------------------------------------------------
 
 const THINKING_PHRASES = [
-    "Thinking...",
-    "Pondering...",
-    "Analyzing...",
-    "Reviewing...",
-    "Reasoning...",
+    "Pensando...",
+    "Reflexionando...",
+    "Analizando...",
+    "Revisando...",
+    "Razonando...",
 ];
 
 function ReasoningBlock({
@@ -404,7 +404,7 @@ function ReasoningBlock({
                 <span className="font-medium ml-2">
                     {isStreaming
                         ? THINKING_PHRASES[thinkingIndex]
-                        : "Thought process"}
+                        : "Proceso de razonamiento"}
                 </span>
                 {!isStreaming && (
                     <ChevronDown
@@ -457,7 +457,7 @@ function DocReadBlock({
             )}
             <div className="ml-2 min-w-0 flex-1 whitespace-normal break-words">
                 <span className="font-medium">
-                    {isStreaming ? "Reading" : "Read"}
+                    {isStreaming ? "Leyendo" : "Leído"}
                 </span>{" "}
                 {isStreaming ? (
                     <span>{filename}...</span>
@@ -489,10 +489,10 @@ function DocFindBlock({
     isStreaming?: boolean;
     showConnector?: boolean;
 }) {
-    const label = isStreaming ? "Finding" : "Found";
+    const label = isStreaming ? "Buscando" : "Encontrado";
     const matchSuffix = isStreaming
         ? ""
-        : ` (${totalMatches} ${totalMatches === 1 ? "match" : "matches"})`;
+        : ` (${totalMatches} ${totalMatches === 1 ? "coincidencia" : "coincidencias"})`;
     return (
         <div className="flex items-start text-sm font-serif text-gray-500 relative">
             {showConnector && (
@@ -509,7 +509,7 @@ function DocFindBlock({
                 <span className="font-medium">{label}</span>{" "}
                 <span>
                     &ldquo;{query}&rdquo;{matchSuffix}
-                    <span className="ml-1 text-gray-400">in {filename}</span>
+                    <span className="ml-1 text-gray-400">en {filename}</span>
                     {isStreaming && "..."}
                 </span>
             </div>
@@ -538,7 +538,7 @@ function DocCreatedBlock({
             )}
             <div className="ml-2 min-w-0 flex-1 whitespace-normal break-words">
                 <span className="font-medium">
-                    {isStreaming ? "Creating" : "Created"}
+                    {isStreaming ? "Creando" : "Creado"}
                 </span>{" "}
                 <span>{isStreaming ? `${filename}...` : filename}</span>
             </div>
@@ -563,9 +563,9 @@ function DocReplicatedBlock({
     isStreaming?: boolean;
     hasError?: boolean;
 }) {
-    const label = isStreaming ? "Replicating" : "Replicated";
+    const label = isStreaming ? "Replicando" : "Replicado";
     const suffix =
-        !isStreaming && count > 1 ? ` ${count} times` : isStreaming ? "..." : "";
+        !isStreaming && count > 1 ? ` ${count} veces` : isStreaming ? "..." : "";
     return (
         <div className="flex items-start text-sm font-serif text-gray-500 relative">
             {showConnector && (
@@ -746,7 +746,7 @@ function WorkflowAppliedBlock({
             )}
             <div className="mt-2 w-1.5 h-1.5 rounded-full bg-green-400 shrink-0" />
             <div className="ml-2 min-w-0 flex-1 whitespace-normal break-words">
-                <span className="font-medium">Applied Workflow</span>{" "}
+                <span className="font-medium">Flujo de trabajo aplicado</span>{" "}
                 {onClick ? (
                     <button
                         onClick={onClick}
@@ -788,10 +788,10 @@ function DocEditedBlock({
             <div className="ml-2 min-w-0 flex-1 whitespace-normal break-words">
                 <span className="font-medium">
                     {isStreaming
-                        ? "Editing"
+                        ? "Editando"
                         : hasError
-                          ? "Edit failed"
-                          : "Edited"}
+                          ? "Edición fallida"
+                          : "Editado"}
                 </span>{" "}
                 <span>{isStreaming ? `${filename}...` : filename}</span>
             </div>
@@ -950,7 +950,7 @@ function MarkdownContent({
                                     <button
                                         onClick={() => {
                                             console.log(
-                                                "[AssistantMessage] citation clicked",
+                                                "[AssistantMessage] referencia seleccionada",
                                                 annotation,
                                             );
                                             onCitationClick?.(annotation);
@@ -1102,7 +1102,7 @@ export function AssistantMessage({
         versionId: string | null;
         downloadUrl: string | null;
     }) => {
-        console.log("[AssistantMessage] handleEditResolved", args);
+        console.log("[AssistantMessage] edición resuelta", args);
         if (args.downloadUrl) {
             setResolvedOverrides((prev) => ({
                 ...prev,
@@ -1266,7 +1266,7 @@ export function AssistantMessage({
                         <div className="absolute bottom-0 w-[1px] bg-gray-300 top-[13px] left-[2.5px] h-[calc(100%+11px)]" />
                     )}
                     <div className="w-1.5 h-1.5 rounded-full border border-gray-400 border-t-transparent animate-spin shrink-0" />
-                    <span className="ml-2">Thinking...</span>
+                    <span className="ml-2">Pensando...</span>
                 </div>
             );
         }
@@ -1497,7 +1497,7 @@ export function AssistantMessage({
                 {isError && (
                     <div className="mt-2 flex items-start gap-2 rounded-lg border border-red-200 bg-red-50 px-3 py-2 text-sm font-serif text-red-700">
                         <span className="leading-snug">
-                            {errorMessage ?? "Sorry, something went wrong."}
+                            {errorMessage ?? "Lo sentimos, algo salió mal."}
                         </span>
                     </div>
                 )}

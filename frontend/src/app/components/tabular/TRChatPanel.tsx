@@ -68,10 +68,10 @@ interface Props {
 // ---------------------------------------------------------------------------
 
 const THINKING_PHRASES = [
-    "Thinking...",
-    "Pondering...",
-    "Analyzing...",
-    "Reasoning...",
+    "Pensando...",
+    "Reflexionando...",
+    "Analizando...",
+    "Razonando...",
 ];
 
 function ReasoningBlock({
@@ -107,7 +107,7 @@ function ReasoningBlock({
                 <span className="font-medium ml-2">
                     {isStreaming
                         ? THINKING_PHRASES[phraseIdx]
-                        : "Thought process"}
+                        : "Proceso de pensamiento"}
                 </span>
                 {!isStreaming && (
                     <ChevronDown
@@ -146,7 +146,7 @@ function DocReadBlock({
                 <div className="w-1.5 h-1.5 rounded-full bg-green-400 shrink-0" />
             )}
             <span className="font-medium ml-2">
-                {isStreaming ? "Reading" : "Read"}
+                {isStreaming ? "Leyendo" : "Leído"}
             </span>
             <span className="ml-1 text-gray-500">{label}</span>
         </div>
@@ -300,7 +300,7 @@ function TRAssistantMessage({
                     className="flex items-center text-sm text-gray-400 ml-1"
                 >
                     <div className="w-1.5 h-1.5 rounded-full border border-gray-400 border-t-transparent animate-spin shrink-0" />
-                    <span className="ml-2">Thinking...</span>
+                    <span className="ml-2">Pensando...</span>
                 </div>
             );
         }
@@ -513,7 +513,7 @@ function TRChatInput({
                 <textarea
                     ref={textareaRef}
                     rows={1}
-                    placeholder="Ask a question about your documents..."
+                    placeholder="Haga una pregunta sobre sus documentos..."
                     value={value}
                     onChange={(e) => {
                         setValue(e.target.value);
@@ -583,7 +583,7 @@ function HistoryDropdown({
                 <input
                     autoFocus
                     type="text"
-                    placeholder="Search chats…"
+                    placeholder="Buscar conversaciones…"
                     value={query}
                     onChange={(e) => setQuery(e.target.value)}
                     className="flex-1 text-xs bg-transparent outline-none placeholder:text-gray-400 text-gray-700"
@@ -594,12 +594,12 @@ function HistoryDropdown({
                     <p className="px-3 py-2 text-xs text-gray-400">
                         {chats.filter((c) => c.id !== currentChatId).length ===
                         0
-                            ? "No previous chats."
-                            : "No matches."}
+                            ? "Sin conversaciones previas."
+                            : "Sin coincidencias."}
                     </p>
                 ) : (
                     filtered.map((chat) => {
-                        const label = chat.title ?? "Chat";
+                        const label = chat.title ?? "Conversación";
                         return (
                             <button
                                 key={chat.id}
@@ -1308,7 +1308,7 @@ export function TRChatPanel({
                                     type: "content" as const,
                                     text: isAbort
                                         ? ""
-                                        : "An error occurred. Please try again.",
+                                        : "Ocurrió un error. Por favor intente de nuevo.",
                                 },
                             ],
                         };
@@ -1374,7 +1374,7 @@ export function TRChatPanel({
                         className="min-w-0 overflow-x-hidden whitespace-nowrap scrollbar-none"
                     >
                         <span className="text-xs font-medium text-gray-700">
-                            {currentChatTitle ?? "Assistant"}
+                            {currentChatTitle ?? "Asistente"}
                         </span>
                     </div>
                 </div>
@@ -1382,7 +1382,7 @@ export function TRChatPanel({
                     <div ref={historyRef} className="relative">
                         <button
                             onClick={() => setHistoryOpen((v) => !v)}
-                            title="Chat history"
+                            title="Historial de conversaciones"
                             className={`flex items-center justify-center h-7 w-7 rounded-md transition-colors ${historyOpen ? "text-gray-900" : "text-gray-400 hover:text-gray-700"}`}
                         >
                             <Clock className="h-3.5 w-3.5" />
@@ -1399,7 +1399,7 @@ export function TRChatPanel({
                     </div>
                     <button
                         onClick={handleNewChat}
-                        title="New chat"
+                        title="Nueva conversación"
                         className="flex items-center justify-center h-7 w-7 rounded-md text-gray-400 hover:text-gray-700 transition-colors"
                     >
                         <MessageSquarePlus className="h-3.5 w-3.5" />
@@ -1407,7 +1407,7 @@ export function TRChatPanel({
                     {currentChatId && (
                         <button
                             onClick={handleDeleteChat}
-                            title="Delete chat"
+                            title="Eliminar conversación"
                             className="flex items-center justify-center h-7 w-7 rounded-md text-gray-400 hover:text-red-600 transition-colors"
                         >
                             <Trash2 className="h-3.5 w-3.5" />
@@ -1415,7 +1415,7 @@ export function TRChatPanel({
                     )}
                     <button
                         onClick={onClose}
-                        title="Close"
+                        title="Cerrar"
                         className="flex items-center justify-center h-7 w-7 rounded-md text-gray-400 hover:text-gray-700 transition-colors"
                     >
                         <X className="h-3.5 w-3.5" />
@@ -1433,7 +1433,7 @@ export function TRChatPanel({
                     <div className="flex flex-1 flex-col items-center justify-center gap-2">
                         <MikeIcon size={24} />
                         <p className="text-sm text-gray-400 text-center">
-                            Ask a question about this tabular review.
+                            Haga una pregunta sobre esta revisión tabular.
                         </p>
                     </div>
                 )}

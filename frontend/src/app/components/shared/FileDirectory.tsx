@@ -51,8 +51,8 @@ export function FileDirectory({
     onChange,
     allowMultiple = true,
     forceExpanded = false,
-    emptyMessage = "No documents yet",
-    heading = "Documents",
+    emptyMessage = "Aún no hay documentos",
+    heading = "Documentos",
     onDelete,
     uploadingFilenames = [],
 }: FileDirectoryProps) {
@@ -176,7 +176,7 @@ export function FileDirectory({
                                     className="inline-flex items-center gap-1 text-xs text-red-500 hover:text-red-700 transition-colors disabled:opacity-50"
                                 >
                                     <Trash2 className="h-3 w-3" />
-                                    Delete
+                                    Eliminar
                                 </button>
                             )}
                             {standaloneDocs.length > 0 && (
@@ -186,8 +186,8 @@ export function FileDirectory({
                                     className="text-xs text-gray-400 hover:text-gray-600 transition-colors"
                                 >
                                     {allStandaloneSelected
-                                        ? "Deselect all"
-                                        : "Select all"}
+                                        ? "Deseleccionar todo"
+                                        : "Seleccionar todo"}
                                 </button>
                             )}
                         </div>
@@ -204,7 +204,7 @@ export function FileDirectory({
                             {filename}
                         </span>
                         <span className="shrink-0 text-gray-300">
-                            Uploading
+                            Subiendo
                         </span>
                     </div>
                 ))}
@@ -251,7 +251,7 @@ export function FileDirectory({
                 {standaloneDocs.length > 0 && directoryProjects.length > 0 && (
                     <div className="border-t border-gray-100 py-2 px-2">
                         <p className="text-xs font-medium text-gray-400">
-                            Projects
+                            Proyectos
                         </p>
                     </div>
                 )}
@@ -289,7 +289,7 @@ export function FileDirectory({
                                 <div>
                                     {docs.length === 0 ? (
                                         <p className="pl-7 py-1 text-xs text-gray-400">
-                                            Empty
+                                            Vacío
                                         </p>
                                     ) : (
                                         docs.map((doc) => {

@@ -1,12 +1,16 @@
 /**
- * Cloudflare R2 storage utilities for Mike document management.
- * R2 is S3-compatible — uses @aws-sdk/client-s3.
+ * AWS S3 / S3-compatible storage for Mike document management.
+ * Uses @aws-sdk/client-s3 — supports AWS S3, Cloudflare R2, MinIO, etc.
  *
  * Required env vars:
- *   R2_ENDPOINT_URL     — https://<account-id>.r2.cloudflarestorage.com
- *   R2_ACCESS_KEY_ID    — R2 API token (Access Key ID)
- *   R2_SECRET_ACCESS_KEY — R2 API token (Secret Access Key)
- *   R2_BUCKET_NAME      — bucket name (default: "mike")
+ *   AWS_REGION            — AWS region (e.g. "us-east-2") or "auto" for R2/MinIO
+ *   AWS_ACCESS_KEY_ID     — Access Key ID
+ *   AWS_SECRET_ACCESS_KEY  — Secret Access Key
+ *   AWS_S3_BUCKET         — bucket name
+ *
+ * Optional:
+ *   S3_ENDPOINT_URL       — custom endpoint for S3-compatible services (R2, MinIO).
+ *                            Omit for standard AWS S3.
  */
 
 import {
@@ -21,31 +25,32 @@ let cachedClient: S3Client | undefined;
 
 function getClient(): S3Client {
   if (!cachedClient) {
+    const endpoint = process.env.S3_ENDPOINT_URL?.trim();
     cachedClient = new S3Client({
-      region: "auto",
-      endpoint: process.env.R2_ENDPOINT_URL!,
-      forcePathStyle: true,
+      region: process.env.AWS_REGION?.trim() || "us-east-1",
+      ...(endpoint
+        ? { endpoint, forcePathStyle: true }
+        : {}),
       credentials: {
-        accessKeyId: process.env.R2_ACCESS_KEY_ID!,
-        secretAccessKey: process.env.R2_SECRET_ACCESS_KEY!,
+        accessKeyId: process.env.AWS_ACCESS_KEY_ID!,
+        secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY!,
       },
     });
   }
   return cachedClient;
 }
 
-const BUCKET = process.env.R2_BUCKET_NAME ?? "mike";
+const BUCKET = process.env.AWS_S3_BUCKET ?? "mike";
 
 export const storageEnabled = Boolean(
-  process.env.R2_ENDPOINT_URL &&
-  process.env.R2_ACCESS_KEY_ID &&
-  process.env.R2_SECRET_ACCESS_KEY,
+  process.env.AWS_ACCESS_KEY_ID &&
+  process.env.AWS_SECRET_ACCESS_KEY,
 );
 
 function requireStorageConfig(): void {
   if (!storageEnabled) {
     throw new Error(
-      "R2_ENDPOINT_URL, R2_ACCESS_KEY_ID, and R2_SECRET_ACCESS_KEY must be set",
+      "AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY must be set",
     );
   }
 }

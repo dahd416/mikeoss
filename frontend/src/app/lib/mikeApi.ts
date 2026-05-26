@@ -60,7 +60,8 @@ async function apiRequest<T>(path: string, init?: RequestInit): Promise<T> {
 
     if (!response.ok) {
         const detail = await response.text();
-        throw new Error(detail || `API error: ${response.status}`);
+        console.error("[mikeApi] Error en la solicitud", "path=" + path, "status=" + response.status, "detail=" + detail);
+        throw new Error(detail || `Error de API: ${response.status}`);
     }
 
     if (
@@ -409,7 +410,7 @@ export async function downloadDocumentsZip(
     });
     if (!response.ok) {
         const detail = await response.text();
-        throw new Error(detail || `API error: ${response.status}`);
+        throw new Error(detail || `Error de API: ${response.status}`);
     }
     return response.blob();
 }

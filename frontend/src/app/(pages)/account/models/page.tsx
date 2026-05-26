@@ -24,17 +24,17 @@ import {
 const API_KEY_FIELDS = [
     {
         provider: "claude",
-        label: "Anthropic (Claude) API Key",
+        label: "Clave API de Anthropic (Claude)",
         placeholder: "sk-ant-…",
     },
     {
         provider: "gemini",
-        label: "Google (Gemini) API Key",
+        label: "Clave API de Google (Gemini)",
         placeholder: "AI…",
     },
     {
         provider: "openai",
-        label: "OpenAI API Key",
+        label: "Clave API de OpenAI",
         placeholder: "sk-…",
     },
 ] as const;
@@ -48,17 +48,17 @@ export default function ModelsAndApiKeysPage() {
             <div className="pb-6">
                 <div className="flex items-center gap-2 mb-4">
                     <h2 className="text-2xl font-medium font-serif">
-                        Model Preferences
+                        Preferencias de modelo
                     </h2>
                 </div>
                 <div className="space-y-4 max-w-md">
                     <div>
                         <label className="text-sm text-gray-600 block mb-2">
-                            Tabular review model
+                            Modelo para revisión tabular
                         </label>
                         <p className="text-xs text-gray-400 mb-2">
-                            We recommend using a smaller model for tabular
-                            reviews to reduce token costs.
+                            Recomendamos usar un modelo más pequeño para
+                            revisiones tabulares y reducir costos de tokens.
                         </p>
                         <TabularModelDropdown
                             value={
@@ -78,17 +78,17 @@ export default function ModelsAndApiKeysPage() {
             <div className="py-6">
                 <div className="flex items-center gap-2 mb-2">
                     <h2 className="text-2xl font-medium font-serif">
-                        API Keys
+                        Claves API
                     </h2>
                 </div>
                 <p className="text-sm text-gray-500 mb-4 max-w-xl">
-                    You must provide your own API keys for the app to work or
-                    add your API keys into the .env file if you are running your
-                    own instance of Mike.
+                    Debes proporcionar tus propias claves API para que la
+                    aplicación funcione o agregarlas al archivo .env si
+                    ejecutas tu propia instancia de Mike.
                 </p>
                 <p className="text-xs text-gray-400 mb-4 max-w-xl">
-                    Title generation automatically routes to the cheapest
-                    configured provider model.
+                    La generación de títulos se enruta automáticamente
+                    al modelo configurado más económico.
                 </p>
                 <div className="space-y-4 max-w-xl">
                     {API_KEY_FIELDS.map((field) => (
@@ -150,7 +150,7 @@ function TabularModelDropdown({
                             <AlertCircle className="h-3.5 w-3.5 shrink-0 text-red-500" />
                         )}
                         <span className="truncate text-gray-900">
-                            {selected?.label ?? "Select a model"}
+                            {selected?.label ?? "Seleccionar un modelo"}
                         </span>
                     </span>
                     <ChevronDown
@@ -184,7 +184,7 @@ function TabularModelDropdown({
                                         onSelect={() => onChange(m.id)}
                                         title={
                                             !available
-                                                ? `Add a ${providerLabel(provider)} API key to use this model`
+                                                ? `Agrega una clave API de ${providerLabel(provider)} para usar este modelo`
                                                 : undefined
                                         }
                                     >
@@ -245,7 +245,7 @@ function ApiKeyField({
             setSaved(true);
             setTimeout(() => setSaved(false), 2000);
         } else {
-            alert(`Failed to save ${label}.`);
+            alert(`Error al guardar ${label}.`);
         }
     };
 
@@ -253,7 +253,7 @@ function ApiKeyField({
         setIsSaving(true);
         const ok = await onRemove();
         setIsSaving(false);
-        if (!ok) alert(`Failed to remove ${label}.`);
+        if (!ok) alert(`Error al eliminar ${label}.`);
     };
 
     return (
@@ -262,19 +262,20 @@ function ApiKeyField({
             {isServerConfigured && (
                 <div className="mb-2 rounded-md border border-blue-100 bg-blue-50 px-3 py-2">
                     <p className="text-xs text-blue-800">
-                        A server .env key is configured for this provider.
-                        Browser API-key edits are disabled.
+                        Hay una clave .env del servidor configurada para este
+                        proveedor. La edición de claves API desde el navegador
+                        está deshabilitada.
                     </p>
                     {hasSavedKey && (
                         <p className="mt-1 text-xs text-blue-800">
-                            The server key will be used for this provider.
+                            Se usará la clave del servidor para este proveedor.
                         </p>
                     )}
                 </div>
             )}
             {hasSavedKey && !isServerConfigured && (
                 <p className="text-xs text-gray-500 mb-2">
-                    A key is saved. Paste a new key to replace it.
+                    Hay una clave guardada. Pega una nueva clave para reemplazarla.
                 </p>
             )}
             <div className="flex gap-2">
@@ -285,9 +286,9 @@ function ApiKeyField({
                         onChange={(e) => setValue(e.target.value)}
                         placeholder={
                             isServerConfigured
-                                ? "Server .env key configured"
+                                ? "Clave .env del servidor configurada"
                                 : hasSavedKey
-                                  ? "Saved key hidden"
+                                  ? "Clave guardada oculta"
                                   : placeholder
                         }
                         className="pr-10"
@@ -300,7 +301,7 @@ function ApiKeyField({
                         onClick={() => setReveal((r) => !r)}
                         disabled={isServerConfigured}
                         className="absolute inset-y-0 right-2 flex items-center text-gray-400 hover:text-gray-600 disabled:cursor-not-allowed disabled:opacity-40"
-                        aria-label={reveal ? "Hide key" : "Show key"}
+                        aria-label={reveal ? "Ocultar clave" : "Mostrar clave"}
                     >
                         {reveal ? (
                             <EyeOff className="h-4 w-4" />
@@ -315,14 +316,14 @@ function ApiKeyField({
                     className="min-w-[80px] transition-all bg-black hover:bg-gray-900 text-white"
                 >
                     {isSaving ? (
-                        "Saving..."
+                        "Guardando..."
                     ) : saved ? (
                         <>
                             <Check className="h-4 w-3" />
-                            Saved
+                            Guardado
                         </>
                     ) : (
-                        "Save"
+                        "Guardar"
                     )}
                 </Button>
                 {hasSavedKey && !isServerConfigured && (
@@ -332,7 +333,7 @@ function ApiKeyField({
                         onClick={handleRemove}
                         disabled={isSaving}
                     >
-                        Remove
+                        Eliminar
                     </Button>
                 )}
             </div>

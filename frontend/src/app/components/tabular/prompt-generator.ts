@@ -5,37 +5,37 @@ const PROMPT_PRESETS: Array<{
     {
         matches: /\bpart(y|ies)\b/i,
         prompt: () =>
-            'Identify all parties referenced in the document. List their full names and describe each party\'s role or capacity in the agreement. If a party is not clearly identified, state "Not addressed".',
+            'Identifica todas las partes referenciadas en el documento. Enumera sus nombres completos y describe la función o capacidad de cada parte en el acuerdo. Si una parte no está claramente identificada, indica "No abordado".',
     },
     {
         matches: /\bchange of control\b/i,
         prompt: () =>
-            'Identify any change of control provisions in the document. Summarize the trigger, the consequences, any consent requirements, and any related termination, acceleration, or notice obligations. If not addressed, state "Not addressed".',
+            'Identifica cualquier disposición sobre cambio de control en el documento. Resume el desencadenante, las consecuencias, los requisitos de consentimiento y cualquier obligación relacionada de terminación, aceleración o notificación. Si no se aborda, indica "No abordado".',
     },
     {
         matches: /\bterminat(e|ion|ing)\b/i,
         prompt: () =>
-            'Extract the termination provisions in the document. Summarize who may terminate, the termination triggers, any notice requirements, cure periods, and the consequences of termination. If not addressed, state "Not addressed".',
+            'Extrae las disposiciones de terminación del documento. Resume quién puede terminar, los desencadenantes de terminación, los requisitos de preaviso, los períodos de subsanación y las consecuencias de la terminación. Si no se aborda, indica "No abordado".',
     },
     {
         matches: /\bgoverning law\b|\bjurisdiction\b/i,
         prompt: () =>
-            'Identify the governing law and jurisdiction provisions in the document. State the governing law, the forum for disputes, and any submission to jurisdiction or venue requirements. If not addressed, state "Not addressed".',
+            'Identifica las disposiciones de ley aplicable y jurisdicción en el documento. Indica la ley aplicable, el foro para disputas y cualquier sumisión a jurisdicción o requisito de competencia territorial. Si no se aborda, indica "No abordado".',
     },
     {
         matches: /\bconfidential(ity)?\b|\bnon-?disclosure\b/i,
         prompt: () =>
-            'Extract the confidentiality provisions in the document. Summarize the scope of confidential information, permitted disclosures, use restrictions, duration, and any carve-outs or exceptions. If not addressed, state "Not addressed".',
+            'Extrae las disposiciones de confidencialidad del documento. Resume el alcance de la información confidencial, las divulgaciones permitidas, las restricciones de uso, la duración y cualquier exclusión o excepción. Si no se aborda, indica "No abordado".',
     },
     {
         matches: /\bassign(ment|ability)?\b/i,
         prompt: () =>
-            'Identify any assignment provisions in the document. Summarize whether assignment is permitted, restricted, or requires consent, and note any exceptions or deemed assignments. If not addressed, state "Not addressed".',
+            'Identifica cualquier disposición de cesión en el documento. Resume si la cesión está permitida, restringida o requiere consentimiento, y señala cualquier excepción o cesión implícita. Si no se aborda, indica "No abordado".',
     },
     {
         matches: /\bpayment\b|\bfees?\b/i,
         prompt: () =>
-            'Extract the payment and fee terms in the document. Summarize payment obligations, amounts, timing, currencies, fee types, and any consequences for late or missed payment. If not addressed, state "Not addressed".',
+            'Extrae las condiciones de pago y honorarios del documento. Resume las obligaciones de pago, importes, plazos, monedas, tipos de honorarios y cualquier consecuencia por retraso o falta de pago. Si no se aborda, indica "No abordado".',
     },
 ];
 
@@ -52,9 +52,9 @@ export function buildFallbackTabularPrompt(title: string): string {
     if (!trimmedTitle) return "";
 
     return (
-        `Review each document and extract the information relevant to "${trimmedTitle}". ` +
-        `Provide a concise, document-specific summary for this column. ` +
-        `Include the key facts, dates, thresholds, parties, and conditions where applicable. ` +
-        `If the document does not contain relevant information, return "Not addressed".`
+        `Revisa cada documento y extrae la información relevante sobre "${trimmedTitle}". ` +
+        `Proporciona un resumen conciso y específico del documento para esta columna. ` +
+        `Incluye los hechos clave, fechas, umbrales, partes y condiciones cuando corresponda. ` +
+        `Si el documento no contiene información relevante, devuelve "No abordado".`
     );
 }

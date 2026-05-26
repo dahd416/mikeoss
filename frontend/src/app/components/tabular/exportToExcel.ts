@@ -24,7 +24,7 @@ function sanitizeFilename(name: string): string {
             .replace(/[\\/:*?"<>|]/g, "")
             .replace(/\s+/g, " ")
             .trim()
-            .slice(0, 80) || "Tabular Review"
+            .slice(0, 80) || "Revisión Tabular"
     );
 }
 
@@ -41,10 +41,10 @@ export async function exportTabularReviewToExcel(params: {
     for (const c of cells) cellMap.set(`${c.document_id}:${c.column_index}`, c);
 
     const wb = new ExcelJS.Workbook();
-    const ws = wb.addWorksheet("Review");
+    const ws = wb.addWorksheet("Revisión");
 
     ws.columns = [
-        { header: "Document", width: 40 },
+        { header: "Documento", width: 40 },
         ...sortedCols.map((c) => ({ header: c.name, width: 40 })),
     ];
 
