@@ -2,8 +2,22 @@ services:
   backend:
     build:
       context: ./backend
-    env_file:
-      - .env.production
+    environment:
+      - NODE_ENV=production
+      - PORT=3001
+      - FRONTEND_URL
+      - SUPABASE_URL
+      - SUPABASE_SECRET_KEY
+      - AWS_REGION
+      - AWS_S3_BUCKET
+      - AWS_ACCESS_KEY_ID
+      - AWS_SECRET_ACCESS_KEY
+      - DOWNLOAD_SIGNING_SECRET
+      - USER_API_KEYS_ENCRYPTION_SECRET
+      - GEMINI_API_KEY
+      - ANTHROPIC_API_KEY
+      - OPENAI_API_KEY
+      - RESEND_API_KEY
     restart: unless-stopped
     ports:
       - "3001:3001"
@@ -13,10 +27,8 @@ services:
       context: ./frontend
       args:
         NEXT_PUBLIC_API_BASE_URL: "${NEXT_PUBLIC_API_BASE_URL:-http://backend:3001}"
-        NEXT_PUBLIC_SUPABASE_URL: "${NEXT_PUBLIC_SUPABASE_URL}"
-        NEXT_PUBLIC_SUPABASE_PUBLISHABLE_DEFAULT_KEY: "${NEXT_PUBLIC_SUPABASE_PUBLISHABLE_DEFAULT_KEY}"
-    env_file:
-      - .env.production
+        NEXT_PUBLIC_SUPABASE_URL: "${NEXT_PUBLIC_SUPABASE_URL:-https://qfoyocesfjnhgqwczhtn.supabase.co}"
+        NEXT_PUBLIC_SUPABASE_PUBLISHABLE_DEFAULT_KEY: "${NEXT_PUBLIC_SUPABASE_PUBLISHABLE_DEFAULT_KEY:-eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFmb3lvY2VzZmpuaGdxd2N6aHRuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk3MjkwMDYsImV4cCI6MjA5NTMwNTAwNn0.N2fLhTPvU6HDpnDHNTpbl-Eh3FtJjpfLKWdqIvdj9xg}"
     restart: unless-stopped
     ports:
       - "3000:3000"
