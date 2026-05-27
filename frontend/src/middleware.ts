@@ -1,7 +1,9 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
-const BACKEND = "http://backend:3001";
+export const runtime = "nodejs";
+
+const BACKEND = process.env.BACKEND_URL || "http://localhost:3001";
 
 const API_PATTERNS = [
     "/chat",
